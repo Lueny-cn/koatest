@@ -80,7 +80,7 @@ exports.signin = function* () {
     };
 
     this.body = {
-        statu_code: 200,
+        code: 200,
         msg: '登录成功',
         name: userInfo.username
     }
@@ -91,7 +91,7 @@ exports.logout = function* () {
     delete this.session.user;
     // this.redirect('back');
      this.body = {
-        statu_code: 200,
+        code: 200,
         msg: '退出成功'
     };
 }
