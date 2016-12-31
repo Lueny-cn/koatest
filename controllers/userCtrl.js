@@ -60,7 +60,6 @@ exports.signup = function *() {
         msg: '注册成功',
         name: userInfo.username
     };
-    this.redirect('/login')
 }
 
 exports.signin = function* () {
