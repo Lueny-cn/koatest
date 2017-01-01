@@ -1,17 +1,33 @@
 const SubjectItemTypeModel = require('../models/subjectItemType');
 const SubjectTypeModel = require('../models/subjectType');
 
-//列出所有用户数据，支持分页
+//列出所有的课程 一级目录 -> 二级目录
 exports.list = function *(next){
-    // let page = this.query.page || 1;
-    // let limit = 10;
-    // let skip = (page-1)*limit;
-    // this.body = yield UserModel.find().skip(skip).limit(limit);
-    let result = yield SubjectItemTypeModel.find();
-    if(result) {
+
+    let result_item = yield SubjectItemTypeModel.find();
+    let result_parent = yield SubjectTypeModel.find();
+
+    if(result_item.length !== 0) {
+        //格式化数据 返回导航栏一级二级目录数据列表
+        let data = {};
+        result_item.forEach((item) => {
+            let tempType = item.parentType;
+            //初始化
+            if(!data[tempType]) {
+                data[tempType] = [];
+            }
+            data[tempType].push(item);
+
+        });
+
+        var res = result_parent.map((item) => {
+            var itemObj = item.toObject();
+            itemObj.subjects = data[item.typename];
+            return itemObj;
+        });
         this.body = {
             code: 200,
-            data: result
+            data: res
         }
     } else {
         this.body = {
