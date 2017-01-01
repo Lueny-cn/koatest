@@ -53,6 +53,7 @@ module.exports = function (app) {
   app.use(route.post( '/user/signup', userController.signup ));
   app.use(route.post( '/user/signin', userController.signin ));
   app.use(route.get( '/user/logout', userController.logout ));
+  app.use(route.get( '/user/isLogin', userController.isLogin ));
   app.use(route.get( '/user/list', userController.list ));
   app.use(route.get( '/subject/create', subjectController.insert )); //post
   app.use(route.get( '/subject/list', subjectController.list ));

@@ -57,10 +57,11 @@ exports.signup = function *() {
     let userInfo = yield UserModel.add(user);
     this.body = {
         code: 200,
+        type: 2,
         msg: '注册成功',
         name: userInfo.username
     };
-}
+};
 
 exports.signin = function* () {
     let _user = this.request.body;
@@ -81,18 +82,34 @@ exports.signin = function* () {
 
     this.body = {
         code: 200,
+        type: 1,
         msg: '登录成功',
         name: userInfo.username
     }
 
-}
+};
 
 exports.logout = function* () {
     delete this.session.user;
     // this.redirect('back');
      this.body = {
         code: 200,
+         type: 3,
         msg: '退出成功'
     };
-}
+};
 
+exports.isLogin = function *(next) {
+    let session = this.session;
+    if(session && session.user) {
+        this.body = {
+            isLogin: 1,
+            user: session.user
+        }
+    } else {
+        this.body = {
+            isLogin: 0
+        }
+    }
+    yield next;
+}
