@@ -24,12 +24,23 @@ exports.list = function *(){
 exports.insert = function *(){
     //下面都是随机造假数据
 
-    let data = {
-        "typename": "职业方向"
-    };
+    let body = this.request.body;
 
-    let result = yield new SubjectTypeModel(data).save();
-    this.body = result;
+    if(body) {
+        let data = {
+            "typename": body.typename
+        };
+        let result = yield new SubjectTypeModel(data).save();
+        this.body = {
+            code: 200,
+            data: result
+        };
+    } else {
+        this.body = {
+            code: 400,
+            msg: "输入数据有误"
+        }
+    }
 };
 
 exports.update  = function *() {

@@ -35,19 +35,24 @@ module.exports = function (app) {
       title: '登录'
     })
   }));
-  app.use(route.get('/updateSubject', function() {
-    return this.render('subjectTypeForm', {
-      title: '修改'
+  app.use(route.get('/createSubjectType', function() {
+    return this.render('SubjectTypeForm', {
+      title: '添加一级目录'
+    })
+  }));
+  app.use(route.get('/updateSubjecttype', function() {
+    return this.render('updateSubjectTypeForm', {
+      title: '修改一级目录'
     })
   }));
   app.use(route.get('/createSubjectItem', function() {
     return this.render('subjectItemTypeForm', {
-      title: '添加'
+      title: '添加二级目录'
     })
   }));
   app.use(route.get('/updateSubjectItem', function() {
     return this.render('updateSubjectItemForm', {
-      title: 'item添加'
+      title: '修改二级目录'
     })
   }));
   app.use(route.post( '/user/signup', userController.signup ));
@@ -57,7 +62,7 @@ module.exports = function (app) {
   app.use(route.get( '/user/list', userController.list ));
   app.use(route.get( '/subject/create', subjectController.insert )); //post
   app.use(route.get( '/subject/list', subjectController.list ));
-  app.use(route.get( '/subjectType/create', subjectTypeController.insert )); //post
+  app.use(route.post( '/subjectType/create', subjectTypeController.insert )); //post
   app.use(route.get( '/subjectType/list', subjectTypeController.list ));
   app.use(route.post( '/subjectType/update', subjectTypeController.update ));
   app.use(route.post( '/subjectItemType/create', subjectItemTypeController.insert ));
