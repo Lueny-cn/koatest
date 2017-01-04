@@ -38,6 +38,24 @@ exports.list = function *(next){
     yield next;
 };
 
+//列出所有的课程 一级目录 -> 二级目录
+exports.listItem = function *(next){
+
+    let result_item = yield SubjectItemTypeModel.find();
+
+    if(result_item != null) {
+        this.body = {
+            code: 200,
+            data: res
+        }
+    } else {
+        this.body = {
+            code: 500,
+            msg: "服务器错误"
+        }
+    }
+    yield next;
+};
 
 exports.insert = function *(next) {
     let body = this.request.body,

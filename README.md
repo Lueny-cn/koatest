@@ -33,7 +33,7 @@
 '}'
 ```
 
-### 获取所有 subjectType
+### 一级目录 , 获取所有 subjectType
 + method: get
 + url: http://localhost:3000/subjectType/list
 + result:
@@ -45,7 +45,7 @@
   "data": [
     {
       "_id": "5865d7f624657a5348fdfbe9",
-      "typename": "时间段1"
+      "typename": "时间段"
     },
     {
       "_id": "5865d85f6e9c5652d809280b",
@@ -67,8 +67,11 @@
 
 ```
 
-## 题库二级选项 subjectItem
+## 题库二级目录 subjectItem
 
++ method: get
++ url: http://localhost:3000/subjectItemType/list
++ result:
 
 1. 成功:
 
@@ -122,6 +125,7 @@
     parentType //这个需要先通过题库一级目录的接口提前获取， 以select option展示
 }
 + result:
+
 1. 成功
 ```json
 '{'
@@ -154,11 +158,12 @@
 '}'
 ```
 
-### 获取导航目录数据
+### 获取导航目录所有数据
 
 + method: get
-+ url: http://localhost:3000/subjectItemType/list
++ url: http://localhost:3000/subjectAll
 + result:
+
 1. 成功:　
 
 ```json

@@ -27,6 +27,36 @@ module.exports = {
             "session": checkLogin
         }
     },
+    "GET /subjectAll": {
+        "request": {
+            "session": checkLogin
+        }
+    },
+    "GET /subjectItemType/list": {
+        "request": {
+            "session": checkLogin
+        }
+    },
+    "GET /subjectType/list": {
+        "request": {
+            "session": checkLogin
+        }
+    },
+    "POST /subjectType/update": {
+        "request": {
+            "session": checkLogin
+        }
+    },
+    "POST /subjectItemType/create": {
+        "request": {
+            "session": checkLogin
+        }
+    },
+    "POST /subjectItemType/update": {
+        "request": {
+            "session": checkLogin
+        }
+    },
     "POST /create": {
         "request": {
             "body": checkCreateBody

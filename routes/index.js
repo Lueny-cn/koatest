@@ -62,6 +62,7 @@ module.exports = function (app) {
   app.use(route.post( '/subjectType/update', subjectTypeController.update ));
   app.use(route.post( '/subjectItemType/create', subjectItemTypeController.insert ));
   app.use(route.post( '/subjectItemType/update', subjectItemTypeController.update ));
-  app.use(route.get( '/subjectItemType/list', subjectItemTypeController.list ));
+  app.use(route.get( '/subjectItemType/list', subjectItemTypeController.listItem ));
+  app.use(route.get( '/subjectAll', subjectItemTypeController.list ));
 
 }
