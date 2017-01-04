@@ -29,6 +29,16 @@ exports.list = function *(next){
             code: 200,
             data: res
         }
+    } else if(result_item.length === 0) {
+        var res = result_parent.map((item) => {
+            var itemObj = item.toObject();
+            itemObj.subjects = "{[]}";
+            return itemObj;
+        });
+        this.body = {
+            code: 200,
+            data: res
+        }
     } else {
         this.body = {
             code: 500,
@@ -38,15 +48,15 @@ exports.list = function *(next){
     yield next;
 };
 
-//列出所有的课程 一级目录 -> 二级目录
+//列出所有的二级目录
 exports.listItem = function *(next){
 
-    let result_item = yield SubjectItemTypeModel.find();
+    let ret = yield SubjectItemTypeModel.find();
 
-    if(result_item != null) {
+    if(ret != null) {
         this.body = {
             code: 200,
-            data: res
+            data: ret
         }
     } else {
         this.body = {

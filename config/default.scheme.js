@@ -27,36 +27,36 @@ module.exports = {
             "session": checkLogin
         }
     },
-    "GET /subjectAll": {
-        "request": {
-            "session": checkLogin
-        }
-    },
-    "GET /subjectItemType/list": {
-        "request": {
-            "session": checkLogin
-        }
-    },
-    "GET /subjectType/list": {
-        "request": {
-            "session": checkLogin
-        }
-    },
-    "POST /subjectType/update": {
-        "request": {
-            "session": checkLogin
-        }
-    },
-    "POST /subjectItemType/create": {
-        "request": {
-            "session": checkLogin
-        }
-    },
-    "POST /subjectItemType/update": {
-        "request": {
-            "session": checkLogin
-        }
-    },
+    // "GET /subjectAll": {
+    //     "request": {
+    //         "session": checkLogin
+    //     }
+    // },
+    // "GET /subjectItemType/list": {
+    //     "request": {
+    //         "session": checkLogin
+    //     }
+    // },
+    // "GET /subjectType/list": {
+    //     "request": {
+    //         "session": checkLogin
+    //     }
+    // },
+    // "POST /subjectType/update": {
+    //     "request": {
+    //         "session": checkLogin
+    //     }
+    // },
+    // "POST /subjectItemType/create": {
+    //     "request": {
+    //         "session": checkLogin
+    //     }
+    // },
+    // "POST /subjectItemType/update": {
+    //     "request": {
+    //         "session": checkLogin
+    //     }
+    // },
     "POST /create": {
         "request": {
             "body": checkCreateBody
@@ -89,7 +89,7 @@ function checkLogin() {
     if (!this.session || !this.session.user) {
         // this.flash = {error: '未登录!'};
         this.body = {
-            result: 'unlogin',
+            code: 1,
             msg: "用户未登录"
         }
 
