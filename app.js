@@ -59,7 +59,7 @@ app.use(scheme(config.schemeConf));
 route(app);
 
 // 启动服务，监听3000端口
-app.listen(3000, ()=>{console.log('Server started, please visit: http://127.0.0.1:3000');});
+app.listen(config.port, ()=>{console.log(`Server started, please visit: http://127.0.0.1:${config.port}`);});
 
 app.on('error', function(err, ctx){
   logger.error('server error', err, ctx);
