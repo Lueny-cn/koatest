@@ -1,4 +1,33 @@
 ##题库一级目录类型
+
+### 添加一级目录
++ method: post,
++ url: http://localhost:3000/subjectType/create
++ data {
+  typename: "时间"
+}
+1. 成功: 
+```json
+{
+  "code": 200,
+  "data": {
+    "__v": 0,
+    "typename": "一级目录",
+    "_id": "586d06121da9a230f87cc3d1",
+    "updated": "2017-01-04T14:26:26.068Z",
+    "created": "2017-01-04T14:26:26.058Z"
+  }
+}
+```
+2. 失败
+```json
+{
+  code: 400,
+  msg: "数据有误"
+
+}
+```
+
 ### 修改  subjectType
 + method:  post
 + url: http://localhost:3000/subjectType/update
@@ -69,6 +98,44 @@
 
 ## 题库二级目录 subjectItem
 
+### 添加二级目录
++ method: post,
++ url: http://localhost:3000/subjectType/create
++ data {
+  subjectName: "大英",
+  parentType: "课内"  //需要获取一级目录数据来填充
+}
+1. 成功: 
+```json
+{
+    "code": 200,
+    "msg": "创建成功",
+    "item": {
+    "subjectName": "大英",
+    "parentType": "课内",
+    "parentId": "5865d85f6e9c5652d809280b"
+    }
+}
+```
+2. 已经存在
+```json
+{
+  code: 400,
+  msg: "已经存在该课程"
+
+}
+```
+3. 失败
+```json
+{
+  code: 500,
+  msg: "数据有误"
+
+}
+
+
+
+###　获取二级目录数据
 + method: get
 + url: http://localhost:3000/subjectItemType/list
 + result:

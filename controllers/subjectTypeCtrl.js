@@ -26,7 +26,7 @@ exports.insert = function *(){
 
     let body = this.request.body;
 
-    if(body) {
+    if(body && body.typename) {
         let data = {
             "typename": body.typename
         };
