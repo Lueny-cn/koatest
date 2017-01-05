@@ -551,7 +551,7 @@
 }
 ```
 
-### 获取试题名 (时间)
+### 获取试题名 (二级目录Id)
 + method: get
 + url: http://localhost:3000/subjectTitleBySbId/:subjectItemId
 + 参数(在url直接添加): {            
