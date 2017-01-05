@@ -345,8 +345,8 @@
 + method: post
 + url: http://localhost:3000/subject/create
 + 参数: {
-  subjectItem: '数学',                              
-  subjectItemId: '586e30cd4958ed24e4baabeb', // 通过二级目录api获取
+  title: 'ACM真题',                              
+  titleId: '586e30cd4958ed24e4baabeb', // 通过 subjecttitle 的api获取
   question: '1+1+3+1+1=?',                        
   choice: [ '7', '44', '5', '6' ],                
   select: 'A',                                    
@@ -360,8 +360,8 @@
   "code": 200,
   "data": {
     "__v": 0,
-    "subjectItem": "数学",
-    "subjectItemId": "586e30cd4958ed24e4baabeb",
+    "title": "ACM真题",
+    "titleId": "586e30cd4958ed24e4baabeb",
     "question": "1+1+3+1+1=?",
     "choice": {
       "D": "6",
@@ -398,11 +398,12 @@
 ```
 
 ### 获取 某一课程 的题库列表
-+ method: post
++ method: get
 + url: http://localhost:3000/subjectListByItemId/:itemId
 + 参数(在url直接添加): {            
   itemId: '586e30cd4958ed24e4baabeb', // 通过二级目录api获取                             
 }
+如: http://localhost:3000/subjectListByItemId/586e30cd4958ed24e4baabeb
 + result 
 ```json
 {
@@ -468,11 +469,12 @@
 
 ```
 ### 获取 某一题 的信息
-+ method: post
++ method: get
 + url: http://localhost:3000/subjectListBySbId/:subjectId
 + 参数(在url直接添加): {            
   subjectId: '586e34444685cd3f707e7497'                        
 }
+如: http://localhost:3000/subjectListBySbId/586e34444685cd3f707e7497
 + result 
 ```json
 {
@@ -513,4 +515,84 @@
   "code": 400,
   "msg": "输入数据有误"
 }
+```
+
+### 获取试题名 (时间)
++ method: get
++ url: http://localhost:3000/subjectTitleByTime/:time
++ 参数(在url直接添加): {            
+  time: 2016                    
+}
++ result 
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "_id": "586e70f15e5f2336d8aa7ef5",
+      "title": "ACM练习"
+    }
+  ]
+}
+```
+2. 失败 
+```json
+{
+ "code": 500,
+ "msg": "服务器错误"
+}
+```
+
+3.参数有误
+```json
+{
+  "code": 400,
+  "msg": "输入数据有误"
+}
+```
+
+### 获取试题名 (时间)
++ method: get
++ url: http://localhost:3000/subjectTitleBySbId/:subjectItemId
++ 参数(在url直接添加): {            
+  subjectItemId: "586e6fb25e5f2336d8aa7ef1"                    
+}
++ result 
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "_id": "586e70f15e5f2336d8aa7ef5",
+      "title": "ACM练习"
+    }
+  ]
+}
+```
+2. 失败 
+```json
+{
+ "code": 500,
+ "msg": "服务器错误"
+}
+```
+
+3.参数有误
+```json
+{
+  "code": 400,
+  "msg": "输入数据有误"
+}
+```
+
+## 后台添加数据
+
+
+### 添加一级目录 localhost:3000/createSubjectType
+
+### 添加二级目录 localhost:3000/createSubjectItem
+
+### 添加试题名 localhost:3000/addSbTitle
+
+### 添加题目 localhost:3000/createSubject
 
