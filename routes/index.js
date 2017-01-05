@@ -4,6 +4,7 @@ const userController = require('../controllers/userCtrl');
 const subjectController = require('../controllers/subjectCtrl');
 const subjectTypeController = require('../controllers/subjectTypeCtrl');
 const subjectItemTypeController = require('../controllers/subjectItemTypeCtrl');
+const subjectTitleController = require('../controllers/subjectTitleCtrl')
 
 module.exports = function (app) {
   // app.use(route.get(''), )
@@ -55,19 +56,36 @@ module.exports = function (app) {
       title: '修改二级目录'
     })
   }));
+  app.use(route.get('/createSubject', function() {
+    return this.render('createSubjectForm', {
+      title: '添加题目'
+    })
+  }));
+  app.use(route.get('/addSbTitle', function() {
+    return this.render('subjectTitleForm', {
+      title: '添加试题名'
+    })
+  }));
+
   app.use(route.post( '/user/signup', userController.signup ));
   app.use(route.post( '/user/signin', userController.signin ));
   app.use(route.get( '/user/logout', userController.logout ));
   app.use(route.get( '/user/isLogin', userController.isLogin ));
   app.use(route.get( '/user/list', userController.list ));
   app.use(route.get( '/subject/create', subjectController.insert )); //post
+  app.use(route.post( '/subject/create', subjectController.insert )); //post
   app.use(route.get( '/subject/list', subjectController.list ));
   app.use(route.post( '/subjectType/create', subjectTypeController.insert )); //post
+  app.use(route.post( '/subjectTitle/create', subjectTitleController.insert )); //post
+  app.use(route.get( '/subjectTitle/list', subjectTitleController.list )); //post
+  app.use(route.get( '/subjectTitle/:titleId', subjectTitleController.oneByTitleId )); //post
   app.use(route.get( '/subjectType/list', subjectTypeController.list ));
   app.use(route.post( '/subjectType/update', subjectTypeController.update ));
   app.use(route.post( '/subjectItemType/create', subjectItemTypeController.insert ));
   app.use(route.post( '/subjectItemType/update', subjectItemTypeController.update ));
   app.use(route.get( '/subjectItemType/list', subjectItemTypeController.listItem ));
   app.use(route.get( '/subjectAll', subjectItemTypeController.list ));
+  app.use(route.get( '/subjectListByItemId/:titleId', subjectController.listByType ));
+  app.use(route.get( '/subjectListBySbId/:subjectId', subjectController.listBySbId ));
 
 }

@@ -14,9 +14,13 @@ const Subject = new Schema({
             unique: true
         }
     },
-    "type": {
+    "title": {
         type: String,
         index: true
+    },
+    "titleId": {
+      type: String,
+      index: true
     },
     "choice": {
       type: Object,
@@ -48,13 +52,21 @@ Subject.pre('save', function (next) {
 
 Subject.statics.add = function (data) {
     return this.create(data);
-}
-//静态方法，按用户名查找，因为Subjectname加了唯一索引，
-//所以这里用的是findOne，只查询一条数据
-Subject.statics.findBySubjectname = function (id) {
-    return this.findOne({id: id})
+};
+
+//这里用的是find，返回同一类型数据集合
+Subject.statics.findByTitleId  = function (id) {
+    return this.find({"titleId": id})
         .exec();
 };
+
+//这里用的是findOne，只查询一条数据
+Subject.statics.findBySubjectId = function (id) {
+    return this.findOne({"_id": id})
+        .exec();
+};
+
+
 
 //创建模型
 const model = mongoose.model('Subject', Subject);

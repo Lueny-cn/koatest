@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+      <form action="/subject/create" method="post">
+        <h3>课程</h3>
+        <input name="title" type="text" placeholder="从课程名获取 /subjectTitle/list">
+        <h3>课程ID</h3>
+        <input name="titleId" type="text" placeholder="从课程名获取 subjectTitle/list">
+
+        <h3>题目</h3>
+        <input name="question" type="text" placeholder="1 +1 = ?">
+
+        <h3>选项</h3>
+        <input name="choice" type="text" >
+        <input name="choice" type="text" >
+        <input name="choice" type="text" >
+        <input name="choice" type="text" >
+
+        <h3>答案</h3>
+        <input name="select" type="text" >
+        <textarea name="detail" type="text" ></textarea>
+
+        <h3>评分</h3>
+        <input name="score" type="text" >
+
+        <input type="submit" value="添加">
+      </form>
+  </body>
+  <script type="text/javascript">
+
+
+  </script>
+</html>

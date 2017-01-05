@@ -339,3 +339,178 @@
 "}"
 ```
 
+## 题目设计
+
+### 添加题目
++ method: post
++ url: http://localhost:3000/subject/create
++ 参数: {
+  subjectItem: '数学',                              
+  subjectItemId: '586e30cd4958ed24e4baabeb', // 通过二级目录api获取
+  question: '1+1+3+1+1=?',                        
+  choice: [ '7', '44', '5', '6' ],                
+  select: 'A',                                    
+  detail: '答案就是就是这么简单的',                          
+  score: '2' }                                    
+}
+
+1. 成功 
+```json
+{
+  "code": 200,
+  "data": {
+    "__v": 0,
+    "subjectItem": "数学",
+    "subjectItemId": "586e30cd4958ed24e4baabeb",
+    "question": "1+1+3+1+1=?",
+    "choice": {
+      "D": "6",
+      "C": "5",
+      "B": "44",
+      "A": "7"
+    },
+    "answer": {
+      "detail": "答案就是就是这么简单的",
+      "select": "A"
+    },
+    "score": 2,
+    "_id": "586e4c427ca0463fe441d6e2",
+    "updated": "2017-01-05T13:38:10.729Z",
+    "created": "2017-01-05T13:38:10.717Z"
+  }
+}
+```
+2. 失败
+```json
+{
+  code: 500,
+  msg: "服务器错误"
+}
+```
+
+3. 参数错误(id不存在或者不是24位的Id)
+```json
+{
+  code: 400,
+  msg: '参数有误'
+  
+}
+```
+
+### 获取 某一课程 的题库列表
++ method: post
++ url: http://localhost:3000/subjectListByItemId/:itemId
++ 参数(在url直接添加): {            
+  itemId: '586e30cd4958ed24e4baabeb', // 通过二级目录api获取                             
+}
++ result 
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "_id": "586e34444685cd3f707e7497",
+      "subjectItem": "数学",
+      "subjectItemId": "586e30cd4958ed24e4baabeb",
+      "question": "3+3=?",
+      "choice": {
+        "A": "424",
+        "B": "44",
+        "C": "5",
+        "D": "6"
+      },
+      "answer": {
+        "select": "D",
+        "detail": "答案就是就是这么简单的"
+      },
+      "score": 2,
+      "__v": 0,
+      "updated": "2017-01-05T11:55:48.062Z",
+      "created": "2017-01-05T11:55:48.061Z"
+    },
+    {
+      "_id": "586e4520e06b9839442db06a",
+      "subjectItem": "数学",
+      "subjectItemId": "586e30cd4958ed24e4baabeb",
+      "question": "1+1+3+1+4=?",
+      "choice": {
+        "A": "10",
+        "B": "44",
+        "C": "5",
+        "D": "6"
+      },
+      "answer": {
+        "select": "A",
+        "detail": "答案就是就是这么简单的"
+      },
+      "score": 2,
+      "__v": 0,
+      "updated": "2017-01-05T13:07:44.104Z",
+      "created": "2017-01-05T13:07:44.096Z"
+    }
+  ]
+}
+```
+2. 失败 
+```json
+{
+ "code": 500,
+ "msg": "服务器错误"
+}
+```
+
+3.参数有误
+```json
+{
+  "code": 400,
+  "msg": "输入数据有误"
+}
+
+```
+### 获取 某一题 的信息
++ method: post
++ url: http://localhost:3000/subjectListBySbId/:subjectId
++ 参数(在url直接添加): {            
+  subjectId: '586e34444685cd3f707e7497'                        
+}
++ result 
+```json
+{
+  "code": 200,
+  "data": {
+    "_id": "586e34444685cd3f707e7497",
+    "subjectItem": "数学",
+    "subjectItemId": "586e30cd4958ed24e4baabeb",
+    "question": "3+3=?",
+    "choice": {
+      "A": "424",
+      "B": "44",
+      "C": "5",
+      "D": "6"
+    },
+    "answer": {
+      "select": "D",
+      "detail": "答案就是就是这么简单的"
+    },
+    "score": 2,
+    "__v": 0,
+    "updated": "2017-01-05T11:55:48.062Z",
+    "created": "2017-01-05T11:55:48.061Z"
+  }
+}
+```
+2. 失败 
+```json
+{
+ "code": 500,
+ "msg": "服务器错误"
+}
+```
+
+3.参数有误
+```json
+{
+  "code": 400,
+  "msg": "输入数据有误"
+}
+

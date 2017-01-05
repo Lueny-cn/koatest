@@ -44,6 +44,13 @@ SubjectItemType.statics.add = function (data) {
     return this.create(data);
 };
 
+
+//根据 _id 查找 数据
+SubjectItemType.statics.findByTypeId = function (itemId) {
+    return this.findOne({"_id": itemId})
+        .exec();
+};
+
 //返回 类型ID
 SubjectItemType.statics.findByTypeName = function (subjectName) {
     return this.findOne({subjectName: subjectName},{"_id": 1})

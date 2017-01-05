@@ -103,12 +103,12 @@ exports.isLogin = function *(next) {
     let session = this.session;
     if(session && session.user) {
         this.body = {
-            code: 1,
+            type: 1,
             user: session.user
         }
     } else {
         this.body = {
-            code: 0,
+            type: 0,
             msg: "用户未登录"
         }
     }

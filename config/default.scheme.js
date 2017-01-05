@@ -77,7 +77,7 @@ function md5 (str) {
 function checkNotLogin() {
     if (this.session && this.session.user) {
        this.body = {
-           result: 'error',
+           type: 1,
            msg: "用户已经登录"
        }
         return false;
@@ -89,7 +89,7 @@ function checkLogin() {
     if (!this.session || !this.session.user) {
         // this.flash = {error: '未登录!'};
         this.body = {
-            code: 1,
+            type: 0,
             msg: "用户未登录"
         }
 
