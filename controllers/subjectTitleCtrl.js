@@ -112,4 +112,51 @@ exports.oneByTitleId = function *(titleId){
             msg: "输入数据有误"
         }
     }
-}
+};
+
+exports.listBySbId = function *(subjectId){
+
+    if(subjectId.match(/^[0-9a-fA-F]{24}$/)) {
+        let result = yield SubjectTitleModel.findByItemId(subjectId);
+        if(result) {
+            this.body = {
+                code: 200,
+                data: result
+            }
+        } else {
+            this.body = {
+                code: 500,
+                msg: "服务器错误"
+            }
+        }
+    } else {
+        this.body = {
+            code: 400,
+            msg: "输入数据有误"
+        }
+    }
+};
+
+exports.listByTime = function *(time){
+
+    if(time) {
+        let result = yield SubjectTitleModel.findByTime(time);
+        if(result) {
+            this.body = {
+                code: 200,
+                data: result
+            }
+        } else {
+            this.body = {
+                code: 500,
+                msg: "服务器错误"
+            }
+        }
+    } else {
+        this.body = {
+            code: 400,
+            msg: "输入数据有误"
+        }
+    }
+};
+

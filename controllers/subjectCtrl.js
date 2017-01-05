@@ -154,4 +154,4 @@ exports.listBySbId = function *(subjectId){
             msg: "输入数据有误"
         }
     }
-}
+};

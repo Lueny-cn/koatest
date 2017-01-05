@@ -78,7 +78,9 @@ module.exports = function (app) {
   app.use(route.post( '/subjectType/create', subjectTypeController.insert )); //post
   app.use(route.post( '/subjectTitle/create', subjectTitleController.insert )); //post
   app.use(route.get( '/subjectTitle/list', subjectTitleController.list )); //post
-  app.use(route.get( '/subjectTitle/:titleId', subjectTitleController.oneByTitleId )); //post
+  app.use(route.get( '/subjectTitleByTitleId/:titleId', subjectTitleController.oneByTitleId )); //post
+  app.use(route.get( '/subjectTitleByTime/:time', subjectTitleController.listByTime )); //post
+  app.use(route.get( '/subjectTitleBySbId/:subjectId', subjectTitleController.listBySbId )); //post
   app.use(route.get( '/subjectType/list', subjectTypeController.list ));
   app.use(route.post( '/subjectType/update', subjectTypeController.update ));
   app.use(route.post( '/subjectItemType/create', subjectItemTypeController.insert ));
