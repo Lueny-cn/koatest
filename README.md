@@ -516,6 +516,12 @@
   "msg": "输入数据有误"
 }
 ```
+### 获取所有试题名 
++ method: get
++ url: http://localhost:3000/subjectTitle/list
+
+
+
 
 ### 获取试题名 (时间)
 + method: get
