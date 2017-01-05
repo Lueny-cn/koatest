@@ -62,13 +62,13 @@ SubjectTitle.statics.findById = function (id) {
 
 //试题时间
 SubjectTitle.statics.findByTime = function (subjectTime) {
-    return this.findOne({"subjectTime": subjectTime}, {"title": 1})
+    return this.find({"subjectTime": subjectTime}, {"title": 1})
         .exec();
 };
 
 //试题类 (二级目录)
 SubjectTitle.statics.findByItemId = function (subjectItemId) {
-    return this.findOne({"subjectItemId": subjectItemId}, {"title": 1})
+    return this.find({"subjectItemId": subjectItemId}, {"title": 1})
         .exec();
 };
 
