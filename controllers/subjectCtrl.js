@@ -109,7 +109,6 @@ exports.listByType = function *(titleId){
     } else  {
         itemExist = false;
     }
-console.log(itemExist)
     if(itemExist) {
         let result = yield SubjectModel.findByTitleId(titleId);
         if(result) {
