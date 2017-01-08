@@ -399,9 +399,9 @@
 
 ### 获取 某一课程 的题库列表
 + method: get
-+ url: http://localhost:3000/subjectListByItemId/:itemId
++ url: http://localhost:3000/subjectListByItemId/:titleId
 + 参数(在url直接添加): {            
-  itemId: '586e30cd4958ed24e4baabeb', // 通过二级目录api获取                             
+  itemId: '586e30cd4958ed24e4baabeb', // 通过 习题名 subjectTitle的 api获取                             
 }
 如: http://localhost:3000/subjectListByItemId/586e30cd4958ed24e4baabeb
 + result 
