@@ -30,6 +30,14 @@ const User = new Schema({
         type: Date,
         default: Date.now,
         index: true
+    },
+    "gender":{
+        type: Number,
+        default: 0
+    },
+    "tel":{
+        type: Number,
+        default:undefined
     }
 });
 
