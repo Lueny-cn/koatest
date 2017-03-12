@@ -101,8 +101,8 @@ function checkLogin() {
 function checkSignupBody() {
     var body = this.request.body;
     var flash;
-    if (!body || !body.username) {
-        flash = {error: '请填写用户名!'};
+    if (!body || !body.email) {
+        flash = {error: '请填写邮箱!'};
     }
     // else if (!body.email || !validator.isEmail(body.email)) {
     //   flash = {error: '请填写正确邮箱地址!'};
@@ -124,7 +124,7 @@ function checkSignupBody() {
         this.redirect('back');
         return false;
     }
-    body.username = validator.trim(body.username);
+    body.email = validator.trim(body.email);
     // body.email = validator.trim(body.email);
     body.password = md5(validator.trim(body.password));
     return true;
@@ -133,7 +133,7 @@ function checkSignupBody() {
 function checkSigninBody() {
     var body = this.request.body;
     var flash;
-    if (!body || !body.username) {
+    if (!body || !body.email) {
         flash = {error: '请填写用户名!'};
     }
     else if (!body.password) {
@@ -144,7 +144,7 @@ function checkSigninBody() {
         this.redirect('back');
         return false;
     }
-    body.username = validator.trim(body.username);
+    body.email = validator.trim(body.email);
     body.password = md5(validator.trim(body.password));
     return true;
 }

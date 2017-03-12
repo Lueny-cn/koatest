@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+      <form action="/user/update" method="post">
+        <div class="field required">
+          <label>邮箱</label>
+          <input placeholder="邮箱" type="text" name="email">
+        </div>
+        <div class="field required">
+          <label>生日</label>
+          <input placeholder="生日" type="text" name="birthday">
+        </div>
+        <div class="field required">
+          <label>昵称</label>
+          <input placeholder="昵称" type="text" name="nikename">
+        </div>
+        <div class="field required">
+          <label>性别</label>
+          <input placeholder="性别" type="text" name="gender">
+        </div>
+        <div class="field required">
+          <label>学校</label>
+          <input placeholder="学校" type="text" name="school">
+        </div>
+        <div class="field required">
+          <label>学历</label>
+          <input placeholder="学历" type="text" name="education">
+        </div>
+        <div class="field required">
+          <label>电话</label>
+          <input placeholder="电话" type="text" name="tel">
+        </div>
+        <input type="submit" class="ui button fluid" value="修改">
+      </form>
+  </body>
+  <script type="text/javascript">
+
+
+  </script>
+</html>

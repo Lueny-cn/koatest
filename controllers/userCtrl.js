@@ -15,7 +15,7 @@ exports.insert = function *(){
     let suffix = Math.round(Math.random()*100);
     let baseNames = ["Sam", "Tom", "Jimmy", "Jack", "Kate", "Emma"];
     let randomIdx = Math.floor(Math.random()*baseNames.length);
-    let username = baseNames[randomIdx] + suffix;
+    let email = baseNames[randomIdx] + suffix;
     let roles = ["asker"];
     if (suffix%3==0){
         roles.push("admin");
@@ -25,7 +25,7 @@ exports.insert = function *(){
     }
     //插入新数据
     let doc = {
-        username: username,
+        email: email,
         password: "dasiwoyebushuo",
         roles: roles
     };
@@ -36,22 +36,22 @@ exports.insert = function *(){
 
 exports.signup = function *() {
     let _user = this.request.body || this.request.query;
-    let username = _user.username;
+    let email = _user.email;
     let password = _user.password;
-
-    if(!username || !password) return;
-    let userExist = yield UserModel.findByUsername(username);
+console.log("=================>>>>> ",email)
+    if(!email || !password) return;
+    let userExist = yield UserModel.findByEmail(email);
     if (userExist) {
         this.body = {
             code: 400,
             result: 'error',
-            msg: '用户名已经存在'
+            msg: '邮箱已经被注册'
         }
         return;
     }
     //插入新数据
     let user = {
-        username: username,
+        email: email,
         password: password
     };
     let userInfo = yield UserModel.add(user);
@@ -59,32 +59,32 @@ exports.signup = function *() {
         code: 200,
         type: 2,
         msg: '注册成功',
-        name: userInfo.username
+        email: userInfo.email
     };
 };
 
 exports.signin = function* () {
     let _user = this.request.body;
-    let username = _user.username;
+    let email = _user.email;
     let password = _user.password;
-    let userInfo = yield UserModel.findByUsername(username);
+    let userInfo = yield UserModel.findByEmail(email);
     if (!userInfo ||  userInfo.password !== password) {
         this.body = {
             result: 'error',
-            msg: '用户名或密码错误'
+            msg: '邮箱或密码错误'
         }
         return ;
     }
 
     this.session.user = {
-      username: userInfo.username
+      email: userInfo.email
     };
 
     this.body = {
         code: 200,
         type: 1,
         msg: '登录成功',
-        name: userInfo.username
+        email: userInfo.email
     }
 
 };
@@ -98,6 +98,51 @@ exports.logout = function* () {
         msg: '退出成功'
     };
 };
+
+//修改用户资料 post
+exports.update =  function* () {
+    let user = this.request.body,
+        userInfo = yield UserModel.findByEmail(user.email);
+
+    console.log("=============>>>>>>.userInfo",  userInfo)
+    console.log("=============>>>>>>.user",  user)
+    if(!userInfo) {
+        this.body = {
+            code: 400,
+            msg: '所填邮箱尚未注册'
+        };
+    } else {
+        let data = {
+            nikename: user.nikename,
+            gender: user.gender,
+            tel: user.tel,
+            birthday: user.birthday,
+            school: user.school,
+            education: user.education
+        };
+
+        let result = yield UserModel.updateByEmail(user.email, data);
+
+        if(result) {
+            this.body = {
+                code: 200,
+                data: result
+            };
+        } else {
+            this.body = {
+                code: 500,
+                msg: "服务器错误"
+            }
+        }
+    }
+
+        
+       
+
+
+}
+
+
 
 exports.isLogin = function *(next) {
     let session = this.session;

@@ -7,7 +7,7 @@ const logger = require('koa-logger');
 const json = require('koa-json');
 const views = require('koa-views');
 const flash = require('koa-flash');
-const scheme = require('koa-scheme');
+const scheme = require('koa-scheme'); 
 const config = require('./config/config');
 const MongoStore = require('koa-generic-session-mongo');
 const cors = require('koa-cors');
@@ -31,10 +31,10 @@ app.use(logger());
 app.use(cors(config.corsOption))
 
 app.use(function *(next){
-  var start = new Date;
-  yield next;
-  var ms = new Date - start;
-  console.log('%s %s - %s', this.method, this.url, ms);
+    var start = new Date;
+    yield next;
+    var ms = new Date - start;
+    console.log('%s %s - %s', this.method, this.url, ms);
 });
 app.keys = ['secret', 'key'];
 /* 服务器 保存session到mongo */
@@ -68,7 +68,7 @@ app.on('error', function(err, ctx){
 
 // 以下MongoDB连接相关代码页可以独立出去，这里偷懒了
 // 连接MongoDB, 在生产环境应该禁用autoIndex，因为会造成性能问题
-const connString = 'mongodb://localhost:27017/test';
+const connString = 'mongodb://localhost:27017/tes2';
 mongoose.connect(connString, { /*config: { autoIndex: false }*/ });
 
 

@@ -36,6 +36,13 @@ module.exports = function (app) {
       title: '登录'
     })
   }));
+
+  app.use(route.get('/user/update', function() {
+    return this.render('userUpdateForm', {
+      title: '修改用户资料'
+    })
+  }));
+
   app.use(route.get('/createSubjectType', function() {
     return this.render('SubjectTypeForm', {
       title: '添加一级目录'
@@ -72,6 +79,7 @@ module.exports = function (app) {
   app.use(route.get( '/user/logout', userController.logout ));
   app.use(route.get( '/user/isLogin', userController.isLogin ));
   app.use(route.get( '/user/list', userController.list ));
+  app.use(route.post( '/user/update', userController.update ));
   app.use(route.get( '/subject/create', subjectController.insert )); //post
   app.use(route.post( '/subject/create', subjectController.insert )); //post
   app.use(route.get( '/subject/list', subjectController.list ));
