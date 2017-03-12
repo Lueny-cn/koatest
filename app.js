@@ -68,14 +68,14 @@ app.on('error', function(err, ctx){
 
 // 以下MongoDB连接相关代码页可以独立出去，这里偷懒了
 // 连接MongoDB, 在生产环境应该禁用autoIndex，因为会造成性能问题
-const connString = 'mongodb://localhost:27017/tes2';
-mongoose.connect(connString, { /*config: { autoIndex: false }*/ });
+// const connString = 'mongodb://localhost:27017/test';
+mongoose.connect(config.mongodb, { /*config: { autoIndex: false }*/ });
 
 
 
 // MongoDB连接成功后回调，这里仅输出一行日志
 mongoose.connection.on('connected', function () {
-    console.log('Mongoose default connection open to ' + connString);
+    console.log('Mongoose default connection open to ' + config.mongodb);
 });
 
 // MongoDB连接出错后回调，这里仅输出一行日志
