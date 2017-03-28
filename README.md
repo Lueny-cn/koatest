@@ -602,3 +602,4 @@
 
 ### 添加题目 localhost:3000/createSubject
 
+### 获取用户个人资料(登录状态: true) (get) http://localhost:3000/user/getDetail

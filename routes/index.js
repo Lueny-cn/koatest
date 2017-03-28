@@ -79,6 +79,7 @@ module.exports = function (app) {
   app.use(route.get( '/user/logout', userController.logout ));
   app.use(route.get( '/user/isLogin', userController.isLogin ));
   app.use(route.get( '/user/list', userController.list ));
+  app.use(route.get( '/user/getDetail', userController.getUserDetail ));
   app.use(route.post( '/user/update', userController.update ));
   app.use(route.get( '/subject/create', subjectController.insert )); //post
   app.use(route.post( '/subject/create', subjectController.insert )); //post

@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports={
   port: process.env.PORT || 3000,
-  mongodb:'mongodb://localhost:27017/test',
+  mongodb:'mongodb://localhost:27017/test2',
   schemeConf: path.join(__dirname, './default.scheme'),
   renderConf: {
     root:  path.join(__dirname, '../views'),

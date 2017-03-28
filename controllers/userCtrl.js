@@ -38,7 +38,6 @@ exports.signup = function *() {
     let _user = this.request.body || this.request.query;
     let email = _user.email;
     let password = _user.password;
-console.log("=================>>>>> ",email)
     if(!email || !password) return;
     let userExist = yield UserModel.findByEmail(email);
     if (userExist) {
@@ -103,9 +102,6 @@ exports.logout = function* () {
 exports.update =  function* () {
     let user = this.request.body,
         userInfo = yield UserModel.findByEmail(user.email);
-
-    console.log("=============>>>>>>.userInfo",  userInfo)
-    console.log("=============>>>>>>.user",  user)
     if(!userInfo) {
         this.body = {
             code: 400,
@@ -135,13 +131,59 @@ exports.update =  function* () {
             }
         }
     }
-
-        
-       
-
-
 }
 
+// exports.userById = function *(userId) {
+
+//    console.log('session',this.session)
+//    console.log('session::: user',this.session.user)
+    
+//     if(userId.match(/^[0-9a-fA-F]{24}$/)) {
+//         let result = yield UserModel.findById(userId);
+//         if(result) {
+//             this.body = {
+//                 code: 200,
+//                 data: result
+//             }
+//         } else {
+//             this.body = {
+//                 code: 500,
+//                 msg: "服务器错误"
+//             }
+//         }
+//     } else {
+//         this.body = {
+//             code: 400,
+//             msg: "输入数据有误"
+//         }
+//     }
+// }
+
+exports.getUserDetail= function *() {
+
+   console.log('session',this.session)
+   console.log('session::: user',this.session.user)
+    
+    if(this.session && this.session.user) {
+        let result = yield UserModel.findByEmail(this.session.user.email);
+        if(result) {
+            this.body = {
+                code: 200,
+                data: result
+            }
+        } else {
+            this.body = {
+                code: 500,
+                msg: "服务器错误"
+            }
+        }
+    } else {
+        this.body = {
+            code: 400,
+            msg: "用户未登录"
+        }
+    }
+}
 
 
 exports.isLogin = function *(next) {

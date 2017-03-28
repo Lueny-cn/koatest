@@ -12,8 +12,7 @@ const User = new Schema({
     "email": {
         type: String,
         index: {
-            unique: true,
-            dropDups: true
+            unique: true
         }
         // match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
@@ -85,6 +84,12 @@ User.statics.updateByEmail = function (email, user) {
         school: user.school,
         education: user.education
     }).exec();
+};
+
+//这里用的是findOne，只查询一条数据
+User.statics.findById = function (id) {
+    return this.findOne({"_id": id})
+        .exec();
 };
 
 //创建模型
