@@ -31,12 +31,12 @@ const User = new Schema({
         default: 0
     },
     "tel": {
-        type: Number,
-        default: 0
+        type: String,
+        default: ""
     },
     "birthday": {
-        type: Date,
-        default: Date.now(),
+        type: Object,
+        default: {},
         index: true
     },
     "school": {

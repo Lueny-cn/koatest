@@ -119,15 +119,20 @@ exports.update =  function* () {
 
         let result = yield UserModel.updateByEmail(user.email, data);
 
-        if(result) {
+        if(result.nModified  && result.nModified === 1) {
             this.body = {
                 code: 200,
-                data: result
-            };
+                msg: "更新成功"
+            }
+        } else if(result.ok && result.ok === 1 ){
+            this.body = {
+                code: 302,
+                msg: "数据未修改"
+            }
         } else {
             this.body = {
                 code: 500,
-                msg: "服务器错误"
+                msg: "服务器发生错误"
             }
         }
     }
