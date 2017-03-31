@@ -6,7 +6,7 @@ exports.list = function *(){
     let limit = 10;
     let skip = (page-1)*limit;
     // this.body = yield UserModel.find().skip(skip).limit(limit);
-    this.body = yield UserModel.find();
+    this.body = yield UserModel.find({},{password:0});
 };
 
 //插入一条新数据，实际应用中应该读取客户端POST数据，本示例仅仅模拟
@@ -119,7 +119,7 @@ exports.update =  function* () {
 
         let result = yield UserModel.updateByEmail(user.email, data);
 
-        if(result.nModified  && result.nModified === 1) {
+        if(result.nModified && result.nModified === 1) {
             this.body = {
                 code: 200,
                 msg: "更新成功"
@@ -165,16 +165,24 @@ exports.update =  function* () {
 // }
 
 exports.getUserDetail= function *() {
-
-   console.log('session',this.session)
-   console.log('session::: user',this.session.user)
     
     if(this.session && this.session.user) {
         let result = yield UserModel.findByEmail(this.session.user.email);
+        delete result.password;
         if(result) {
             this.body = {
                 code: 200,
-                data: result
+                data: {
+                    _id: result._id,
+                    email: result.email,
+                    updated: result.updated,
+                    education: result.education,
+                    school: result.school,
+                    birthday: result.birthday,
+                    tel: result.tel,
+                    gender: result.gender || 0,
+                    nikename: result.nikename
+                }
             }
         } else {
             this.body = {
