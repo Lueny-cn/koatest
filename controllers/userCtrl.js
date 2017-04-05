@@ -6,7 +6,7 @@ exports.list = function *(){
     let limit = 10;
     let skip = (page-1)*limit;
     // this.body = yield UserModel.find().skip(skip).limit(limit);
-    this.body = yield UserModel.find({},{password:0});
+    this.body = yield UserModel.find();
 };
 
 //插入一条新数据，实际应用中应该读取客户端POST数据，本示例仅仅模拟
@@ -100,8 +100,21 @@ exports.logout = function* () {
 
 //修改用户资料 post
 exports.update =  function* () {
-    let user = this.request.body,
-        userInfo = yield UserModel.findByEmail(user.email);
+    let user = this.request.body
+      , userInfo
+      , email;
+
+    if(this.session && this.session.user) {
+        email = this.session.user.email;
+        userInfo = yield UserModel.findByEmail(email);
+    } else {
+        this.body = {
+            code: 400,
+            msg: "用户未登录"
+        }
+        return ;
+    }
+
     if(!userInfo) {
         this.body = {
             code: 400,
@@ -117,9 +130,9 @@ exports.update =  function* () {
             education: user.education
         };
 
-        let result = yield UserModel.updateByEmail(user.email, data);
+        let result = yield UserModel.updateByEmail(email, data);
 
-        if(result.nModified && result.nModified === 1) {
+        if(result.nModified  && result.nModified === 1) {
             this.body = {
                 code: 200,
                 msg: "更新成功"
@@ -168,21 +181,10 @@ exports.getUserDetail= function *() {
     
     if(this.session && this.session.user) {
         let result = yield UserModel.findByEmail(this.session.user.email);
-        delete result.password;
         if(result) {
             this.body = {
                 code: 200,
-                data: {
-                    _id: result._id,
-                    email: result.email,
-                    updated: result.updated,
-                    education: result.education,
-                    school: result.school,
-                    birthday: result.birthday,
-                    tel: result.tel,
-                    gender: result.gender || 0,
-                    nikename: result.nikename
-                }
+                data: result
             }
         } else {
             this.body = {
