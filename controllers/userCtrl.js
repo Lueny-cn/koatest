@@ -78,7 +78,7 @@ exports.signin = function* () {
     this.session.user = {
       email: userInfo.email
     };
-
+    this.cookies.set("userEmail", userInfo.email)
     this.body = {
         code: 200,
         type: 1,
