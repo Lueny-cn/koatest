@@ -78,7 +78,15 @@ exports.signin = function* () {
     this.session.user = {
       email: userInfo.email
     };
-    this.cookies.set("userEmail", userInfo.email)
+    //获取当前时间
+    let date = new Date();
+    let expireDays = 2;
+    //将date设置为 2 天以后的时间
+    date.setTime(date.getTime() + expireDays * 24 * 3600 * 1000);
+    this.cookies.set("userEmail", userInfo.email, {
+        expire: date.toGMTString(),
+        domain: ".test.com"
+    });
     this.body = {
         code: 200,
         type: 1,
