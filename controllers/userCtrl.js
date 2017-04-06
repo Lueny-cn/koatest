@@ -84,9 +84,10 @@ exports.signin = function* () {
     //将date设置为 2 天以后的时间
     date.setTime(date.getTime() + expireDays * 24 * 3600 * 1000);
     this.cookies.set("userEmail", userInfo.email, {
-        expire: date.toGMTString(),
-        domain: ".test.com"
+        expires: date.toGMTString(),
+        domain: "localhost.test.com"
     });
+
     this.body = {
         code: 200,
         type: 1,

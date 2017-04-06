@@ -11,9 +11,7 @@ module.exports={
     cache: true,
     debug: false,
     locals: {
-      "name": "Node.js-club",
       "version": "0.0.1",
-      "description": "一个分享与发现的地方",
       "locale": "zh-cn"
     }
   },
