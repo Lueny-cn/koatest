@@ -21,7 +21,7 @@ const User = new Schema({
         match: /\w+/,
         index: true
     },
-    "nikename": {
+    "nickname": {
         type: String,
         default: "",
         index: true
@@ -77,7 +77,7 @@ User.statics.findByEmail = function (email) {
 
 User.statics.updateByEmail = function (email, user) {
     return this.update({email: email}, {
-        nikename: user.nikename,
+        nickname: user.nickname,
         gender: user.gender,
         tel: user.tel,
         birthday: user.birthday,

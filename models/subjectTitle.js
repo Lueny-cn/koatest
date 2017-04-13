@@ -7,6 +7,9 @@ const Schema = mongoose.Schema;
 //type:字段类型，包括String,Number,Date,Buffer,Boolean,Mixed,ObjectId,Array
 //index:是否索引，注意唯一索引unique的写法
 //default:默认值
+
+
+// 试题(比如 xxx面试题)
 const SubjectTitle = new Schema({
    "title": {
        type: String,
@@ -25,6 +28,16 @@ const SubjectTitle = new Schema({
     "subjectTime": {
         type: String,
         index: true
+    },
+    "finished": {
+        type: Boolean,
+        index: true,
+        default: false
+    },
+    "read": {
+        type: Boolean,
+        index: true,
+        default: false
     },
     "created": {
         type: Date,
@@ -72,6 +85,17 @@ SubjectTitle.statics.findByItemId = function (subjectItemId) {
         .exec();
 };
 
+SubjectTitle.statics.doFinished = function(SubjectTitleId){
+    return this.update({"_id": SubjectTitleId}, {
+        finished: true
+    })
+}
+
+SubjectTitle.statics.doRead = function(SubjectTitleId){
+    return this.update({"_id": SubjectTitleId}, {
+        Read: true
+    })
+}
 
 //创建模型
 const model = mongoose.model('SubjectTitle', SubjectTitle);

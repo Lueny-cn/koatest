@@ -76,7 +76,9 @@ exports.signin = function* () {
     }
 
     this.session.user = {
-      email: userInfo.email
+      email: userInfo.email,
+      nickname:userInfo.nickname
+
     };
     //获取当前时间
     let date = new Date();
@@ -84,7 +86,7 @@ exports.signin = function* () {
     //将date设置为 2 天以后的时间
     date.setTime(date.getTime() + expireDays * 24 * 3600 * 1000);
     this.cookies.set("userEmail", userInfo.email, {
-        expires: date.toGMTString(),
+        maxAge: date,
         domain: "localhost.test.com"
     });
 
@@ -131,7 +133,7 @@ exports.update =  function* () {
         };
     } else {
         let data = {
-            nikename: user.nikename,
+            nickname: user.nickname,
             gender: user.gender,
             tel: user.tel,
             birthday: user.birthday,

@@ -49,7 +49,7 @@ exports.insert = function *(){
 
 //更新
 exports.update = function *(){
-    //下面都是假数据
+
     var body = this.request.body;
     var data ={};
     if(body) {
@@ -159,4 +159,31 @@ exports.listByTime = function *(time){
         }
     }
 };
+
+exports.doFinshed = function *(){
+
+    let subjectTitleId = this.request.body.subjectTitleId;
+
+    if(time) {
+        let result = yield SubjectTitleModel.findByTime(time);
+        if(result) {
+            this.body = {
+                code: 200,
+                data: result
+            }
+        } else {
+            this.body = {
+                code: 500,
+                msg: "服务器错误"
+            }
+        }
+    } else {
+        this.body = {
+            code: 400,
+            msg: "输入数据有误"
+        }
+    }
+};
+
+
 
