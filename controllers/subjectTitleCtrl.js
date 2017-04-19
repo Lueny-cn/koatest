@@ -54,31 +54,29 @@ exports.update = function *(){
     var data ={};
     if(body) {
 
-        subject.choice instanceof Array ?
-            subject.choice.forEach( (item, index) => {
-                choiceObj[fromCodePoint(65+index)] = item; //"A", "B", "C", ......
-            }) : "";
+       var subjectItem = yield SubjectItemModel.findByTypeName(body.subjectItem);
+       if(subjectItem) {
+           data.title = body.title;
+           data.subjectItem = body.subjectItem;
+           data.subjectItemId = subjectItem._id;
+           data.subjectTime = body.subjectTime;
+       }
 
-        data.subjectItem = subject.subjectItem;
-        data.subjectItemId = subject.subjectItemId;
-        data.question = subject.question;
-        data.choice =  choiceObj;
-        data.answer = {
-            select: subject.select,
-            detail: subject.detail
-        };
-        data.score = parseInt(subject.score);
-
-        let result = yield new SubjectTitleModel(data).save();
-        if(result) {
+        let result = yield new SubjectTitleModel(data).update(subjectItem._id, data);
+        if(result.nModified  && result.nModified === 1) {
             this.body = {
                 code: 200,
-                data: result
-            };
+                msg: "更新成功"
+            }
+        } else if(result.ok && result.ok === 1 ){
+            this.body = {
+                code: 302,
+                msg: "数据未修改"
+            }
         } else {
             this.body = {
                 code: 500,
-                msg: "服务器错误"
+                msg: "服务器发生错误"
             }
         }
     } else {
@@ -162,15 +160,25 @@ exports.listByTime = function *(time){
 
 exports.doFinshed = function *(){
 
-    let subjectTitleId = this.request.body.subjectTitleId;
+    let body = this.request.body,
+        subjectTitleId = body.subjectTitleId;
 
-    if(time) {
-        let result = yield SubjectTitleModel.findByTime(time);
+     if(subjectTitleId.match(/^[0-9a-fA-F]{24}$/)) {
+       let result = yield SubjectTitleModel.findById(subjectTitleId);
         if(result) {
-            this.body = {
-                code: 200,
-                data: result
-            }
+           let updateRes = yield  SubjectTitleModel.doFinshed(subjectTitleId);
+           if(updateRes) {
+               this.body = {
+                   code: 200,
+                   data: updateRes,
+                   msg: "已经完成"
+               }
+           } else {
+               this.body = {
+                   code: 500,
+                   msg: "服务器错误"
+               }
+           }
         } else {
             this.body = {
                 code: 500,
@@ -180,10 +188,54 @@ exports.doFinshed = function *(){
     } else {
         this.body = {
             code: 400,
-            msg: "输入数据有误"
+            msg: "数据有误"
         }
     }
 };
+
+exports.doRead = function *(){
+
+    let body = this.request.body,
+        subjectTitleId = body.subjectTitleId;
+
+     if(subjectTitleId.match(/^[0-9a-fA-F]{24}$/)) {
+       let result = yield SubjectTitleModel.findById(subjectTitleId);
+        if(result) {
+           let updateRes = yield  SubjectTitleModel.doRead(subjectTitleId);
+           if(updateRes) {
+               this.body = {
+                   code: 200,
+                   data: updateRes,
+                   msg: "已阅读"
+               }
+           } else {
+               this.body = {
+                   code: 500,
+                   msg: "服务器错误"
+               }
+           }
+        } else {
+            this.body = {
+                code: 500,
+                msg: "服务器错误"
+            }
+        }
+    } else {
+        this.body = {
+            code: 400,
+            msg: "数据有误"
+        }
+    }
+};
+
+exports.listFinished = function *() {
+    this.body = yield SubjectTitleModel.find({"finished": true});
+}
+
+exports.listRead = function *() {
+    this.body = yield SubjectTitleModel.find({"read": true});
+}
+
 
 
 

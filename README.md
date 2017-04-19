@@ -100,7 +100,7 @@
 
 ### 添加二级目录
 + method: post,
-+ url: http://localhost:3000/subjectType/create
++ url: http://localhost:3000/subjectItem/create
 + data {
   subjectName: "大英",
   parentType: "课内"  //需要获取一级目录数据来填充

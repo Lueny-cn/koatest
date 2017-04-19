@@ -22,7 +22,6 @@ exports.list = function *(){
 
 //插入一条新数据，实际应用中应该读取客户端POST数据，本示例仅仅模拟
 exports.insert = function *(){
-    //下面都是随机造假数据
 
     let body = this.request.body;
 
