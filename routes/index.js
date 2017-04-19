@@ -98,8 +98,8 @@ module.exports = function (app) {
   app.use(route.get( '/subjectAll', subjectItemTypeController.list ));
   app.use(route.get( '/subjectListByItemId/:titleId', subjectController.listByType ));
   app.use(route.get( '/subjectListBySbId/:subjectId', subjectController.listBySbId ));
-  app.use(route.get( '/subjects/doFinished', subjectTitleController.doFinshed ));
-  app.use(route.get( '/subjects/doRead', subjectTitleController.doRead ));
+  app.use(route.post( '/subjects/doFinished', subjectTitleController.doFinshed ));
+  app.use(route.post( '/subjects/doRead', subjectTitleController.doRead ));
   app.use(route.get( '/subjects/listFinished', subjectTitleController.listFinished ));
   app.use(route.get( '/subjects/listRead', subjectTitleController.listRead ));
   

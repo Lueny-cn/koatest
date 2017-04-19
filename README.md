@@ -602,4 +602,12 @@
 
 ### 添加题目 localhost:3000/createSubject
 
-### 获取用户个人资料(登录状态: true) (get) http://localhost:3000/user/getDetail
+### 试题状态 已做 (post) http://localhost:3000/subjects/doFinished 
+参数 {subjectTitleId: subjectTitleId }
+
+### 试题状态 打开过 (post) http://localhost:3000/subjects/doRead 
+参数 {subjectTitleId: subjectTitleId }
+
+### 获取试题状态 已做的试题 (post) http://localhost:3000/subjects/listFinished
+
+### 获取试题状态 打开过的试题 (post) http://localhost:3000/subjects/listRead
