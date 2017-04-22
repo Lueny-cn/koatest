@@ -19,7 +19,7 @@ exports.insert = function *(){
         fromCodePoint = String.fromCodePoint;
     if(subject) {
 
-        let titleId = yield SubjectTitleModel.findByTypeName(subject.title);
+        let titleId = yield SubjectTitleModel.findByTitle(subject.title);
         
         if(!titleId) {
             this.body = {
