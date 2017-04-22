@@ -346,7 +346,6 @@
 + url: http://localhost:3000/subject/create
 + 参数: {
   title: 'ACM真题',                              
-  titleId: '586e30cd4958ed24e4baabeb', // 通过 subjecttitle 的api获取
   question: '1+1+3+1+1=?',                        
   choice: [ '7', '44', '5', '6' ],                
   select: 'A',                                    
