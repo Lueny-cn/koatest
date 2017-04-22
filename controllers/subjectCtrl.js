@@ -19,13 +19,23 @@ exports.insert = function *(){
         fromCodePoint = String.fromCodePoint;
     if(subject) {
 
+        let titleId = yield SubjectTitleModel.findByTypeName(subject.title);
+        
+        if(!titleId) {
+            this.body = {
+                code: 400,
+                msg: "课程不存在"
+            }
+            return ;
+        }
+
         subject.choice instanceof Array ?
             subject.choice.forEach( (item, index) => {
                 choiceObj[fromCodePoint(65+index)] = item;
             }) : "";
 
         data.title = subject.title;
-        data.titleId = subject.titleId;
+        data.titleId = titleId;
         data.question = subject.question;
         data.choice =  choiceObj;
         data.answer = {

@@ -50,12 +50,12 @@ module.exports = function (app) {
   }));
   app.use(route.get('/updateSubjecttype', function() {
     return this.render('updateSubjectTypeForm', {
-      title: '修改一级目录'
+      title: '修改一级目录, 课程所属类'
     })
   }));
   app.use(route.get('/createSubjectItem', function() {
     return this.render('subjectItemTypeForm', {
-      title: '添加二级目录'
+      title: '添加二级目录, 课程名'
     })
   }));
   app.use(route.get('/updateSubjectItem', function() {
