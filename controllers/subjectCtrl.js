@@ -35,7 +35,7 @@ exports.insert = function *(){
             }) : "";
 
         data.title = subject.title;
-        data.titleId = titleId;
+        data.titleId = titleId._id;
         data.question = subject.question;
         data.choice =  choiceObj;
         data.answer = {
