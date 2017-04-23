@@ -87,13 +87,13 @@ SubjectTitle.statics.findByItemId = function (subjectItemId) {
 
 SubjectTitle.statics.doFinished = function(SubjectTitleId){
     return this.update({"_id": SubjectTitleId}, {
-        finished: true
+        "finished": true
     })
 }
 
 SubjectTitle.statics.doRead = function(SubjectTitleId){
     return this.update({"_id": SubjectTitleId}, {
-        Read: true
+        "read": true
     })
 }
 
