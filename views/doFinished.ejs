@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+      <form action="/subjects/doFinished" method="post">
+        <div class="field required">
+          <label>title</label>
+          <input placeholder="试题名" type="text" name="title">
+        </div>
+        <div class="field required">
+          <label>titleId</label>
+          <input placeholder="试题id" type="text" name="titleId">
+        </div>
+         <div class="field required">
+          <label>history</label>
+          <input placeholder="答题情况(object)" type="text" name="history">
+        </div>
+         <div class="field required">
+          <label>score</label>
+          <input placeholder="分数" type="text" name="score">
+        </div>
+        <input type="submit" class="ui button fluid" value="提交">
+      </form>
+  </body>
+  <script type="text/javascript">
+
+
+  </script>
+</html>

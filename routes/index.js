@@ -5,7 +5,7 @@ const subjectController = require('../controllers/subjectCtrl');
 const subjectTypeController = require('../controllers/subjectTypeCtrl');
 const subjectItemTypeController = require('../controllers/subjectItemTypeCtrl');
 const subjectTitleController = require('../controllers/subjectTitleCtrl')
-
+const examCtrl = require("../controllers/examCtrl")
 module.exports = function (app) {
   // app.use(route.get(''), )
   
@@ -73,6 +73,16 @@ module.exports = function (app) {
       title: '添加试题名'
     })
   }));
+  app.use(route.get('/addDoRead', function() {
+    return this.render('doReadForm', {
+      title: '阅读过..'
+    })
+  }));
+  app.use(route.get('/addDoFinished', function() {
+    return this.render('doFinished', {
+      title: '提交答题情况'
+    })
+  }));
 
   app.use(route.post( '/user/signup', userController.signup ));
   app.use(route.post( '/user/signin', userController.signin ));
@@ -98,9 +108,9 @@ module.exports = function (app) {
   app.use(route.get( '/subjectAll', subjectItemTypeController.list ));
   app.use(route.get( '/subjectListByItemId/:titleId', subjectController.listByType ));
   app.use(route.get( '/subjectListBySbId/:subjectId', subjectController.listBySbId ));
-  app.use(route.post( '/subjects/doFinished', subjectTitleController.doFinshed ));
-  app.use(route.post( '/subjects/doRead', subjectTitleController.doRead ));
-  app.use(route.get( '/subjects/listFinished', subjectTitleController.listFinished ));
-  app.use(route.get( '/subjects/listRead', subjectTitleController.listRead ));
+  app.use(route.post( '/subjects/doFinished', examCtrl.doFinished ));
+  app.use(route.post( '/subjects/doRead', examCtrl.doRead ));
+  app.use(route.get( '/subjects/listFinished', examCtrl.listFinished ));
+  app.use(route.get( '/subjects/listRead', examCtrl.listRead ));
   
 }

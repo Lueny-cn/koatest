@@ -93,7 +93,13 @@ exports.oneByTitleId = function *(titleId){
 
     if(titleId.match(/^[0-9a-fA-F]{24}$/)) {
         let result = yield SubjectTitleModel.findById(titleId);
+       
         if(result) {
+            let item = {
+                _id: result._id,
+                visited: result.visited
+            };
+            yield SubjectTitleModel.addAcount(item); 
             this.body = {
                 code: 200,
                 data: result
@@ -235,7 +241,3 @@ exports.listFinished = function *() {
 exports.listRead = function *() {
     this.body = yield SubjectTitleModel.find({"read": true});
 }
-
-
-
-

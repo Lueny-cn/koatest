@@ -39,6 +39,11 @@ const SubjectTitle = new Schema({
         index: true,
         default: false
     },
+    "visited": {
+        type: Number,
+        index: true,
+        default: 0
+    },
     "created": {
         type: Date,
         default: Date.now,
@@ -97,6 +102,11 @@ SubjectTitle.statics.doRead = function(SubjectTitleId){
     })
 }
 
+SubjectTitle.statics.addAcount = function(subjectItem){
+    return this.update({"_id": subjectItem._id}, {
+        "visited": subjectItem.visited + 1
+    })
+}
 //创建模型
 const model = mongoose.model('SubjectTitle', SubjectTitle);
 

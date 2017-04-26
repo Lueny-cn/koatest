@@ -602,10 +602,27 @@
 ### 添加题目 localhost:3000/createSubject
 
 ### 试题状态 已做 (post) http://localhost:3000/subjects/doFinished 
-参数 {subjectTitleId: subjectTitleId }
+/**
+ * method: post
+ * data: {
+ *  titleId: 试题名id[string]
+ *  title: 试题名[string]
+ *  history: 答题记录[试题序列对应的用户答案的键值对 对象]
+    score: 分数[string]
+ * }
+ */
+
+
 
 ### 试题状态 打开过 (post) http://localhost:3000/subjects/doRead 
-参数 {subjectTitleId: subjectTitleId }
+/**
+ * method: post
+ * data: {
+ *  titleId: 试题名id
+ *  title: 试题名
+ *  
+ * }
+ */
 
 ### 获取试题状态 已做的试题 (post) http://localhost:3000/subjects/listFinished
 
