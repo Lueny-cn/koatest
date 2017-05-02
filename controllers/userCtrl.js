@@ -77,7 +77,8 @@ exports.signin = function* () {
 
     this.session.user = {
       email: userInfo.email,
-      nickname:userInfo.nickname
+      nickname:userInfo.nickname,
+      role: userInfo.role
 
     };
     //获取当前时间

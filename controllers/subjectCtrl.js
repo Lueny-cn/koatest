@@ -1,5 +1,6 @@
 const SubjectModel = require('../models/subject');
 const SubjectTitleModel = require('../models/subjectTitle')
+const helper = require("../helper/helper");
 
 //列出所有用户数据，支持分页
 exports.list = function *(){
@@ -12,7 +13,11 @@ exports.list = function *(){
 
 //插入一条新数据，实际应用中应该读取客户端POST数据，本示例仅仅模拟
 exports.insert = function *(){
-    //下面都是假数据
+ 
+    
+    //验证权限
+    helper.auth(this);
+    
     var subject = this.request.body;
     var choiceObj = {},
         data ={},
@@ -66,7 +71,10 @@ exports.insert = function *(){
 
 //更新
 exports.update = function *(){
-    //下面都是假数据
+    
+    //验证权限
+    helper.auth(this);
+
     var subject = this.request.body;
     var choiceObj = {},
         data ={},

@@ -53,16 +53,16 @@ SubjectItemType.statics.findByTypeId = function (itemId) {
 
 //返回 类型ID
 SubjectItemType.statics.findByTypeName = function (subjectName) {
-    return this.findOne({subjectName: subjectName},{"_id": 1})
+    return this.findOne({"subjectName": subjectName},{"_id": 1})
         .exec();
 };
 
 //修改
 SubjectItemType.statics.updateById = function (id, item) {
-    return this.update({_id: id}, {
-        subjectName: item.subjectName,
-        parentType:  item.parentType,
-        parentId:  item.parentId
+    return this.update({"_id": id}, {
+        "subjectName": item.subjectName,
+        "parentType":  item.parentType,
+        "parentId":  item.parentId
     }).exec();
 };
 

@@ -1,5 +1,6 @@
 const SubjectItemTypeModel = require('../models/subjectItemType');
 const SubjectTypeModel = require('../models/subjectType');
+const helper = require("../helper/helper");
 
 //列出所有的课程 一级目录 -> 二级目录
 exports.list = function *(next){
@@ -68,6 +69,10 @@ exports.listItem = function *(next){
 };
 
 exports.insert = function *(next) {
+
+    //验证权限
+    helper.auth(this);
+
     let body = this.request.body,
         subjectName = body.subjectName,
         parentType = body.parentType;
@@ -107,6 +112,10 @@ exports.insert = function *(next) {
     yield next;
 };
 exports.update = function *(next) {
+    
+     //验证权限
+    helper.auth(this);
+
     let body = this.request.body,
         _id = body._id,
         subjectName = body.subjectName,

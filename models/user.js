@@ -56,6 +56,10 @@ const User = new Schema({
     "updated": {
         type: Date,
         default: Date.now
+    },
+    "role": {
+        type: String,
+        default: "user"
     }
 });
 

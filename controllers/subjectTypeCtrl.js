@@ -1,4 +1,5 @@
 const SubjectTypeModel = require('../models/subjectType');
+const helper = require("../helper/helper");
 
 //列出所有数据
 exports.list = function *(){
@@ -23,6 +24,9 @@ exports.list = function *(){
 //插入一条新数据，实际应用中应该读取客户端POST数据，本示例仅仅模拟
 exports.insert = function *(){
 
+    //验证权限
+    helper.auth(this);
+
     let body = this.request.body;
 
     if(body && body.typename) {
@@ -43,6 +47,10 @@ exports.insert = function *(){
 };
 
 exports.update  = function *() {
+
+    //验证权限
+    helper.auth(this);
+    
     let body = this.request.body,
         typename = body.subjectType,
         _id = body._id;

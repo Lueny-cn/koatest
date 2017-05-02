@@ -1,6 +1,7 @@
 const SubjectTitleModel = require('../models/subjectTitle');
 const SubjectItemModel = require('../models/subjectItemType');
-
+const helper = require("../helper/helper");
+const ExamModel = require("../models/exam")
 //列出所有用户数据，支持分页
 exports.list = function *(){
     // let page = this.query.page || 1;
@@ -12,6 +13,10 @@ exports.list = function *(){
 
 //插入一条新数据，实际应用中应该读取客户端POST数据，本示例仅仅模拟
 exports.insert = function *(){
+
+    //验证权限
+    helper.auth(this);
+
 
     var body = this.request.body;
     var data ={};
@@ -50,6 +55,10 @@ exports.insert = function *(){
 //更新
 exports.update = function *(){
 
+
+     //验证权限
+    helper.auth(this);
+
     var body = this.request.body;
     var data ={};
     if(body) {
@@ -62,7 +71,7 @@ exports.update = function *(){
            data.subjectTime = body.subjectTime;
        }
 
-        let result = yield new SubjectTitleModel(data).update(subjectItem._id, data);
+        let result = yield SubjectTitleModel.updateById(subjectItem._id, data);
         if(result.nModified  && result.nModified === 1) {
             this.body = {
                 code: 200,
@@ -240,4 +249,59 @@ exports.listFinished = function *() {
 
 exports.listRead = function *() {
     this.body = yield SubjectTitleModel.find({"read": true});
+}
+
+
+//post 
+exports.updateWeight= function *() {
+    let titleId = this.request.body.titleId;
+
+    if(titleId !== undefined && titleId.match(/^[0-9a-fA-F]{24}$/)) {
+        let weight = 5;  //系统推荐
+        let resExam = yield ExamModel.find().
+                        sort({"account": 1}).limit(16);
+
+        //做题多的 +3
+        resExam.map( (item) => {
+            if(titleId == item._id) {
+                weight += 3;
+            }
+        });                 
+        let resTime = yield SubjectTitleModel.find().
+                        sort({"created": -1}).limit(10);
+        //新题 +2
+        resTime.map( (item) => {
+            if(titleId == item._id) {
+                weight += 2;
+            }
+        });    
+
+        let resWeight = yield SubjectTitleModel.find({"_id": titleId}, {"weight": 1});
+        let result = yield SubjectTitleModel.updateWeightById(titleId, weight, resWeight);
+
+
+        if(result.nModified  && result.nModified === 1) {
+            this.body = {
+                code: 200,
+                msg: "权值更新成功"
+            }
+        } else if(result.ok && result.ok === 1 ){
+            this.body = {
+                code: 302,
+                msg: "数据未修改"
+            }
+        } else {
+            this.body = {
+                code: 500,
+                msg: "服务器发生错误"
+            }
+        }
+    }
+}
+
+exports.listWeight= function *(limit) {
+    if( typeof(limit) !== "number") {
+        limit = 50;
+    }
+    this.body = yield SubjectTitleModel.find().sort({"weight": -1}).limit(limit);
 }

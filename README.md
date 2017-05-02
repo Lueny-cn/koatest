@@ -601,13 +601,33 @@
 
 ### 添加题目 localhost:3000/createSubject
 
+### 修改二级目录 (post) localhost:3000/subjectItemType/update
+data = {
+  _id : 二级目录的id, (localhost:3000/subjectItemType/list 获取二级目录列表里面的_id)
+  subjectName: 试题名
+  parentType: 一级目录名
+}
+
+
+
+### 修改试题名 (post) localhost:3000/subjectTitle/update
+
+data = {
+  subjectItem: 试题二级目录名[String],
+  title: 试题名[String],
+  subjectTime: 试题时间[String]
+}
+
+
+
+
 ### 试题状态 已做 (post) http://localhost:3000/subjects/doFinished 
 /**
  * method: post
  * data: {
  *  titleId: 试题名id[string]
  *  title: 试题名[string]
- *  history: 答题记录[试题序列对应的用户答案的键值对 对象]
+ *  history: 答题记录[试题序列对应的用户答案的键值对 Object]
     score: 分数[string]
  * }
  */
@@ -627,3 +647,13 @@
 ### 获取试题状态 已做的试题 (post) http://localhost:3000/subjects/listFinished
 
 ### 获取试题状态 打开过的试题 (post) http://localhost:3000/subjects/listRead
+
+
+### 推荐 试题接口: (post) http://localhost:3000/subjectTitle/updateWeight 
+参数: 
+data = {
+  titleId: 试题名id
+}
+
+### 获取按权值排序的试题列表 (get) http://localhost:3000/subjectTitle/listWeigh/:limit  
+(注: limit 是 Number 类型)

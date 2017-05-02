@@ -84,6 +84,12 @@ module.exports = function (app) {
     })
   }));
 
+   app.use(route.get('/addWeight', function() {
+    return this.render('weightForm', {
+      title: '试题推荐权值'
+    })
+  }));
+
   app.use(route.post( '/user/signup', userController.signup ));
   app.use(route.post( '/user/signin', userController.signin ));
   app.use(route.get( '/user/logout', userController.logout ));
@@ -96,6 +102,7 @@ module.exports = function (app) {
   app.use(route.get( '/subject/list', subjectController.list ));
   app.use(route.post( '/subjectType/create', subjectTypeController.insert )); //post
   app.use(route.post( '/subjectTitle/create', subjectTitleController.insert )); //post
+  app.use(route.post( '/subjectTitle/update', subjectTitleController.update )); //post
   app.use(route.get( '/subjectTitle/list', subjectTitleController.list )); //post
   app.use(route.get( '/subjectTitleByTitleId/:titleId', subjectTitleController.oneByTitleId )); //post
   app.use(route.get( '/subjectTitleByTime/:time', subjectTitleController.listByTime )); //post
@@ -112,5 +119,6 @@ module.exports = function (app) {
   app.use(route.post( '/subjects/doRead', examCtrl.doRead ));
   app.use(route.get( '/subjects/listFinished', examCtrl.listFinished ));
   app.use(route.get( '/subjects/listRead', examCtrl.listRead ));
-  
+  app.use(route.post( '/subjectTitle/updateWeight', subjectTitleController.updateWeight )); 
+  app.use(route.get( '/subjectTitle/listWeigh/:limit', subjectTitleController.listWeight )); 
 }

@@ -29,21 +29,6 @@ const SubjectTitle = new Schema({
         type: String,
         index: true
     },
-    "finished": {
-        type: Boolean,
-        index: true,
-        default: false
-    },
-    "read": {
-        type: Boolean,
-        index: true,
-        default: false
-    },
-    "visited": {
-        type: Number,
-        index: true,
-        default: 0
-    },
     "created": {
         type: Date,
         default: Date.now,
@@ -53,6 +38,10 @@ const SubjectTitle = new Schema({
         type: Date,
         default: Date.now,
         index: true
+    },
+    "weight": {
+        type: Number,
+        default: 0
     }
 });
 
@@ -88,6 +77,23 @@ SubjectTitle.statics.findByTime = function (subjectTime) {
 SubjectTitle.statics.findByItemId = function (subjectItemId) {
     return this.find({"subjectItemId": subjectItemId}, {"title": 1})
         .exec();
+};
+
+//修改
+SubjectTitle.statics.updateById = function (id, item) {
+    return this.update({"_id": id}, {
+        "title": item.title,
+        "subjectItem":  item.subjectItem,
+        "subjectItemId":  item.subjectItemId,
+        "subjectTime":  item.subjectTime
+    }).exec();
+};
+
+//修改
+SubjectTitle.statics.updateWeightById = function (id, weight, defaultWeight) {
+    return this.update({"_id": id}, {
+        "weight": defaultWeight + weight
+    }).exec();
 };
 
 SubjectTitle.statics.doFinished = function(SubjectTitleId){
