@@ -277,7 +277,7 @@ exports.updateWeight= function *() {
         });    
 
         let resWeight = yield SubjectTitleModel.find({"_id": titleId}, {"weight": 1});
-        let result = yield SubjectTitleModel.updateWeightById(titleId, weight, resWeight);
+        let result = yield SubjectTitleModel.updateWeightById(titleId, weight, resWeight[0].weight);
 
 
         if(result.nModified  && result.nModified === 1) {

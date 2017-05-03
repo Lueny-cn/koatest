@@ -92,7 +92,7 @@ SubjectTitle.statics.updateById = function (id, item) {
 //修改
 SubjectTitle.statics.updateWeightById = function (id, weight, defaultWeight) {
     return this.update({"_id": id}, {
-        "weight": defaultWeight + weight
+        "weight": +defaultWeight + weight
     }).exec();
 };
 
