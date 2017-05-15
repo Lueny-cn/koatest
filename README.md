@@ -663,3 +663,9 @@ data = {
   pre_password: "xxx1"
   new_password: "xxx2"
 }
+
+### 修改试题考试时间 (post) localhost:3000/subjectTitle/updateExamTime
+{
+  titleId,
+  examTime
+}

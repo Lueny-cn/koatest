@@ -305,3 +305,32 @@ exports.listWeight= function *(limit) {
     }
     this.body = yield SubjectTitleModel.find().sort({"weight": -1}).limit(limit);
 }
+
+//post 
+exports.updateExamTime= function *() {
+    let titleId = this.request.body.titleId;
+
+    if(titleId !== undefined && titleId.match(/^[0-9a-fA-F]{24}$/)) {
+        let examTime = this.request.body.examTime;
+
+        let result = yield SubjectTitleModel.updateExamTime(titleId, examTime);
+
+
+        if(result.nModified  && result.nModified === 1) {
+            this.body = {
+                code: 200,
+                msg: "考试时间更新成功"
+            }
+        } else if(result.ok && result.ok === 1 ){
+            this.body = {
+                code: 302,
+                msg: "数据未修改"
+            }
+        } else {
+            this.body = {
+                code: 500,
+                msg: "服务器发生错误"
+            }
+        }
+    }
+}

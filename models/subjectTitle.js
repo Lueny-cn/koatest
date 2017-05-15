@@ -29,6 +29,11 @@ const SubjectTitle = new Schema({
         type: String,
         index: true
     },
+    "examTime": {
+        type: String,
+        index: true,
+        default: "60min"
+    },
     "created": {
         type: Date,
         default: Date.now,
@@ -93,6 +98,13 @@ SubjectTitle.statics.updateById = function (id, item) {
 SubjectTitle.statics.updateWeightById = function (id, weight, defaultWeight) {
     return this.update({"_id": id}, {
         "weight": +defaultWeight + weight
+    }).exec();
+};
+
+//修改
+SubjectTitle.statics.updateExmaTime= function (id, time) {
+    return this.update({"_id": id}, {
+        "examTime": time
     }).exec();
 };
 

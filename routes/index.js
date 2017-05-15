@@ -127,5 +127,5 @@ module.exports = function (app) {
   app.use(route.get( '/subjects/listRead', examCtrl.listRead ));
   app.use(route.post( '/subjectTitle/updateWeight', subjectTitleController.updateWeight )); 
   app.use(route.get( '/subjectTitle/listWeigh/:limit', subjectTitleController.listWeight )); 
-
+  app.use(route.post( '/subjectTitle/updateExamTime', subjectTitleController.updateExamTime )); 
 }
