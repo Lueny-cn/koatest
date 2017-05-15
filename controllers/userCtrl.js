@@ -1,12 +1,26 @@
 const UserModel = require('../models/user');
+const crypto = require('crypto');
+
+function md5 (str) {
+    return crypto.createHash('md5').update(str).digest('hex');
+}
 
 //列出所有用户数据，支持分页
 exports.list = function *(){
     let page = this.query.page || 1;
     let limit = 10;
     let skip = (page-1)*limit;
+    let role = "asker";
     // this.body = yield UserModel.find().skip(skip).limit(limit);
-    this.body = yield UserModel.find();
+    if(this.session && this.session.user) {
+        role = this.session.user.role;
+    } 
+
+    if(role === "admin") {
+        this.body = yield UserModel.find();
+    } else {
+         this.body = yield UserModel.find({},{"password": 0});
+    }
 };
 
 //插入一条新数据，实际应用中应该读取客户端POST数据，本示例仅仅模拟
@@ -163,6 +177,65 @@ exports.update =  function* () {
         }
     }
 }
+
+//修改用户密码post
+exports.updatePassword =  function* () {
+    let user = this.request.body
+      , userInfo
+      , email;
+
+    if(this.session && this.session.user) {
+        email = this.session.user.email;
+        userInfo = yield UserModel.findByEmail(email);
+    } else {
+        this.body = {
+            code: 400,
+            msg: "用户未登录"
+        }
+        return ;
+    }
+
+    if(!userInfo) {
+        this.body = {
+            code: 400,
+            msg: '所填邮箱尚未注册'
+        };
+    } else {
+        let md5_pre_password = md5(user.pre_password);
+        if(userInfo.password !== md5_pre_password) {
+            this.body = {
+                code: 400,
+                msg: '输入旧密码错误'
+            };
+            return;
+        }
+
+        let data = {
+            password: md5(user.new_password),
+           
+        };
+
+        let result = yield UserModel.updatePwd(email, data);
+
+        if(result.nModified  && result.nModified === 1) {
+            this.body = {
+                code: 200,
+                msg: "更新成功"
+            }
+        } else if(result.ok && result.ok === 1 ){
+            this.body = {
+                code: 302,
+                msg: "密码未修改"
+            }
+        } else {
+            this.body = {
+                code: 500,
+                msg: "服务器发生错误"
+            }
+        }
+    }
+}
+
 
 // exports.userById = function *(userId) {
 

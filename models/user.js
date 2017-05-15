@@ -80,13 +80,19 @@ User.statics.findByEmail = function (email) {
 };
 
 User.statics.updateByEmail = function (email, user) {
+    return this.update({"email": email}, {
+        "nickname": user.nickname,
+        "gender": user.gender,
+        "tel": user.tel,
+        "birthday": user.birthday,
+        "school": user.school,
+        "education": user.education
+    }).exec();
+};
+
+User.statics.updatePwd = function (email, user) {
     return this.update({email: email}, {
-        nickname: user.nickname,
-        gender: user.gender,
-        tel: user.tel,
-        birthday: user.birthday,
-        school: user.school,
-        education: user.education
+        "password": user.password
     }).exec();
 };
 

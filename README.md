@@ -657,3 +657,9 @@ data = {
 
 ### 获取按权值排序的试题列表 (get) http://localhost:3000/subjectTitle/listWeigh/:limit  
 (注: limit 是 Number 类型)
+
+### 修改密码  (post) localhost:3000/user/updatePassword  
+{
+  pre_password: "xxx1"
+  new_password: "xxx2"
+}

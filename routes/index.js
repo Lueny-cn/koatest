@@ -84,9 +84,14 @@ module.exports = function (app) {
     })
   }));
 
-   app.use(route.get('/addWeight', function() {
+  app.use(route.get('/addWeight', function() {
     return this.render('weightForm', {
       title: '试题推荐权值'
+    })
+  }));
+  app.use(route.get('/updatePassword', function() {
+    return this.render('updatePwd', {
+      title: '修改密码'
     })
   }));
 
@@ -97,6 +102,7 @@ module.exports = function (app) {
   app.use(route.get( '/user/list', userController.list ));
   app.use(route.get( '/user/getDetail', userController.getUserDetail ));
   app.use(route.post( '/user/update', userController.update ));
+  app.use(route.post( '/user/updatePassword', userController.updatePassword ));
   app.use(route.get( '/subject/create', subjectController.insert )); //post
   app.use(route.post( '/subject/create', subjectController.insert )); //post
   app.use(route.get( '/subject/list', subjectController.list ));
@@ -121,4 +127,5 @@ module.exports = function (app) {
   app.use(route.get( '/subjects/listRead', examCtrl.listRead ));
   app.use(route.post( '/subjectTitle/updateWeight', subjectTitleController.updateWeight )); 
   app.use(route.get( '/subjectTitle/listWeigh/:limit', subjectTitleController.listWeight )); 
+
 }

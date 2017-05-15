@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+      <form action="/user/updatePassword" method="post">
+        <div class="field required">
+          <label>原密码</label>
+          <input placeholder="原密码" type="text" name="pre_password">
+        </div>
+        <div class="field required">
+          <label>新密码</label>
+          <input placeholder="新密码" type="password" name="new_password">
+        </div>
+        <input type="submit" class="ui button fluid" value="修改">
+      </form>
+  </body>
+  <script type="text/javascript">
+
+
+  </script>
+</html>
