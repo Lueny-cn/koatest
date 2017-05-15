@@ -95,7 +95,8 @@ exports.signin = function* () {
         code: 200,
         type: 1,
         msg: '登录成功',
-        email: userInfo.email
+        email: userInfo.email,
+        role: userInfo.role
     }
 
 };

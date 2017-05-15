@@ -59,7 +59,7 @@ const User = new Schema({
     },
     "role": {
         type: String,
-        default: "user"
+        default: "asker"
     }
 });
 
