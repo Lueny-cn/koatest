@@ -34,6 +34,11 @@ const SubjectTitle = new Schema({
         index: true,
         default: "60min"
     },
+    "imgUrl": {
+        type: String,
+        index: true,
+        default: ''
+    },
     "created": {
         type: Date,
         default: Date.now,
@@ -91,6 +96,14 @@ SubjectTitle.statics.updateById = function (id, item) {
         "subjectItem":  item.subjectItem,
         "subjectItemId":  item.subjectItemId,
         "subjectTime":  item.subjectTime
+    }).exec();
+};
+
+//修改
+SubjectTitle.statics.updateUrlById = function (id, imgUrls) {
+    return this.update({"_id": id}, {
+        "imgUrl": imgUrl,
+       
     }).exec();
 };
 

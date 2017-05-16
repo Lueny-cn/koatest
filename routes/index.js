@@ -128,4 +128,5 @@ module.exports = function (app) {
   app.use(route.post( '/subjectTitle/updateWeight', subjectTitleController.updateWeight )); 
   app.use(route.get( '/subjectTitle/listWeigh/:limit', subjectTitleController.listWeight )); 
   app.use(route.post( '/subjectTitle/updateExamTime', subjectTitleController.updateExamTime )); 
+  app.use(route.post( '/subjectTitle/upload/:titleId', uploadCtrl.upload ));
 }
