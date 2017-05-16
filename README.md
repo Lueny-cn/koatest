@@ -671,4 +671,4 @@ data = {
 }
 
 ## 上传图片 (post) localhost:3000/subjectTitle/upload/:titleId
-(前端配合andtd Form表单的上传图片使用)
+(前端配合andtd Form表单的上传图片组件使用)
