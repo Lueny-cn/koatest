@@ -4,8 +4,10 @@ const userController = require('../controllers/userCtrl');
 const subjectController = require('../controllers/subjectCtrl');
 const subjectTypeController = require('../controllers/subjectTypeCtrl');
 const subjectItemTypeController = require('../controllers/subjectItemTypeCtrl');
-const subjectTitleController = require('../controllers/subjectTitleCtrl')
-const examCtrl = require("../controllers/examCtrl")
+const subjectTitleController = require('../controllers/subjectTitleCtrl');
+const examCtrl = require("../controllers/examCtrl");
+const uploadCtrl = require("../controllers/upload")
+
 module.exports = function (app) {
   // app.use(route.get(''), )
   
