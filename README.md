@@ -615,7 +615,8 @@ data = {
 data = {
   subjectItem: 试题二级目录名[String],
   title: 试题名[String],
-  subjectTime: 试题时间[String]
+  subjectTime: 试题时间[String],
+  examTime: 考试时间[String]
 }
 
 

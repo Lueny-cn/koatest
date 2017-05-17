@@ -32,7 +32,7 @@ const SubjectTitle = new Schema({
     "examTime": {
         type: String,
         index: true,
-        default: "60min"
+        default: "30min"
     },
     "imgUrl": {
         type: String,
@@ -95,7 +95,8 @@ SubjectTitle.statics.updateById = function (id, item) {
         "title": item.title,
         "subjectItem":  item.subjectItem,
         "subjectItemId":  item.subjectItemId,
-        "subjectTime":  item.subjectTime
+        "subjectTime":  item.subjectTime,
+        "examTime": item.examTime
     }).exec();
 };
 

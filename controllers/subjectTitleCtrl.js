@@ -30,6 +30,7 @@ exports.insert = function *(){
            data.subjectItem = body.subjectItem;
            data.subjectItemId = subjectItem._id;
            data.subjectTime = body.subjectTime;
+           data.examTime = body.examTime
 
            let result = yield new SubjectTitleModel(data).save();
            if(result) {
@@ -69,6 +70,7 @@ exports.update = function *(){
            data.subjectItem = body.subjectItem;
            data.subjectItemId = subjectItem._id;
            data.subjectTime = body.subjectTime;
+           data.examTime = body.examTime;
        }
 
         let result = yield SubjectTitleModel.updateById(subjectItem._id, data);
