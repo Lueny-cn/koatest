@@ -613,6 +613,7 @@ data = {
 ### 修改试题名 (post) localhost:3000/subjectTitle/update
 
 data = {
+  preTitleid：被修改的试题Id，
   subjectItem: 试题二级目录名[String],
   title: 试题名[String],
   subjectTime: 试题时间[String],

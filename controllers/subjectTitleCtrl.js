@@ -18,13 +18,13 @@ exports.insert = function *(){
     helper.auth(this);
 
 
-    var body = this.request.body;
-    var data ={};
+    let body = this.request.body;
+    let data ={};
 
 
     if(body) {
 
-       var subjectItem = yield SubjectItemModel.findByTypeName(body.subjectItem);
+       let subjectItem = yield SubjectItemModel.findByTypeName(body.subjectItem);
        if(subjectItem) {
            data.title = body.title;
            data.subjectItem = body.subjectItem;
@@ -60,20 +60,22 @@ exports.update = function *(){
      //验证权限
     helper.auth(this);
 
-    var body = this.request.body;
-    var data ={};
-    if(body) {
-
-       var subjectItem = yield SubjectItemModel.findByTypeName(body.subjectItem);
-       if(subjectItem) {
+    let body = this.request.body;
+    let data ={};
+    if(body &&  (body.preTitleId.match(/^[0-9a-fA-F]{24}$/))) {
+       let subjectItem = yield SubjectItemModel.findByTypeName(body.subjectItem);
+       let subjectTitle = yield SubjectTitleModel.find({"_id":body.preTitleId});
+       
+       if(subjectItem && subjectTitle) {
            data.title = body.title;
+           data._id = body.preTitleId;
            data.subjectItem = body.subjectItem;
            data.subjectItemId = subjectItem._id;
-           data.subjectTime = body.subjectTime;
-           data.examTime = body.examTime;
+           data.subjectTime = body.subjectTime ||subjectTitle[0].subjectTime ;
+           data.examTime = body.examTime || subjectTitle[0].examTime;
        }
 
-        let result = yield SubjectTitleModel.updateById(subjectItem._id, data);
+        let result = yield SubjectTitleModel.updateById(data._id, data);
         if(result.nModified  && result.nModified === 1) {
             this.body = {
                 code: 200,

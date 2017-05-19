@@ -75,6 +75,11 @@ module.exports = function (app) {
       title: '添加试题名'
     })
   }));
+  app.use(route.get('/updateSbTitle', function() {
+    return this.render('updateSbtForm', {
+      title: '修改试题名'
+    })
+  }));
   app.use(route.get('/addDoRead', function() {
     return this.render('doReadForm', {
       title: '阅读过..'
