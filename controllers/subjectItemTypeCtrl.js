@@ -127,9 +127,17 @@ exports.update = function *(next) {
     if(!parentId) {
         parentId = yield SubjectTypeModel.findIdBySubjectType(parentType);
         parentId = parentId._id
-        console.log("what ????")
     }
+    let resExist = yield SubjectItemTypeModel.find({"subjectName":subjectName});
+   console.log("resExist", resExist)
+    if(resExist.length !== 0) {
+        this.body = {
+            code: 302,
+            msg: "二级目录已经存在"
 
+        }
+        return ;
+    }
     if(parentId) {
         let item = {
             subjectName,
@@ -137,7 +145,7 @@ exports.update = function *(next) {
             parentId
         };
 
-        console.log(item)
+
         let result = yield SubjectItemTypeModel.updateById(_id, item);
 
         if(result.nModified  && result.nModified === 1) {
