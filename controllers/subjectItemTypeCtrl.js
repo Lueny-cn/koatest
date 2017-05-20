@@ -123,9 +123,11 @@ exports.update = function *(next) {
         parentId,
         parentType
        } = body;
+       
     if(!parentId) {
         parentId = yield SubjectTypeModel.findIdBySubjectType(parentType);
         parentId = parentId._id
+        console.log("what ????")
     }
 
     if(parentId) {
@@ -136,7 +138,7 @@ exports.update = function *(next) {
         };
 
         console.log(item)
-        let result = yield SubjectItemTypeModel.update(_id, item);
+        let result = yield SubjectItemTypeModel.updateById(_id, item);
 
         if(result.nModified  && result.nModified === 1) {
             this.body = {

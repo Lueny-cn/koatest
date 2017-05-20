@@ -60,9 +60,7 @@ SubjectItemType.statics.findByTypeName = function (subjectName) {
 //修改
 SubjectItemType.statics.updateById = function (id, item) {
     return this.update({"_id": id}, {
-        "subjectName": item.subjectName,
-        // "parentType":  item.parentType,
-        // "parentId":  item.parentId
+        "subjectName": item.subjectName
     }).exec();
 };
 

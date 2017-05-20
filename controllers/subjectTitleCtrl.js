@@ -63,19 +63,25 @@ exports.update = function *(){
     let body = this.request.body;
     let data ={};
     if(body &&  (body.preTitleId.match(/^[0-9a-fA-F]{24}$/))) {
-       let subjectItem = yield SubjectItemModel.findByTypeName(body.subjectItem);
+       let subjectItem = yield SubjectItemModel.find({"_id": body.subjectItemId});
        let subjectTitle = yield SubjectTitleModel.find({"_id":body.preTitleId});
-       
-       if(subjectItem && subjectTitle) {
-           data.title = body.title;
-           data._id = body.preTitleId;
-           data.subjectItem = body.subjectItem;
-           data.subjectItemId = subjectItem._id;
-           data.subjectTime = body.subjectTime ||subjectTitle[0].subjectTime ;
-           data.examTime = body.examTime || subjectTitle[0].examTime;
-       }
 
+console.log("subjectItem", subjectItem)
+console.log("subjectTitle", subjectTitle)
+console.log("preTitleId", body.preTitleId)
+       if(subjectItem && subjectTitle) {
+           data = {
+                title: body.title,
+                _id: body.preTitleId,
+                subjectItem: subjectItem[0].subjectName,
+                subjectItemId: body.subjectItemId,
+                subjectTime: body.subjectTime ||subjectTitle[0].subjectTime,
+                examTime: body.examTime || subjectTitle[0].examTime
+           }
+       }
+console.log("subjectTitle data", data)
         let result = yield SubjectTitleModel.updateById(data._id, data);
+        console.log("subjectTitle result", result)
         if(result.nModified  && result.nModified === 1) {
             this.body = {
                 code: 200,

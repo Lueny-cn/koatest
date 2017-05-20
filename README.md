@@ -618,7 +618,7 @@ data = {
 ```js
 data = {
   preTitleid：被修改的试题Id，
-  subjectItem: 试题二级目录名[String],
+  subjectItemId: 试题二级目录的Id[String],
   title: 试题名[String],
   subjectTime: 试题时间[String],
   examTime: 考试时间[String]
