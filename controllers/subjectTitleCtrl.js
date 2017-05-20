@@ -78,7 +78,7 @@ exports.update = function *(){
         }
        if(subjectItem && subjectTitle) {
            data = {
-                title: body.title,
+                title: body.title ||subjectTitle[0].title,
                 _id: body.preTitleId,
                 subjectItem: subjectItem[0].subjectName,
                 subjectItemId: body.subjectItemId,
