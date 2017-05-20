@@ -129,7 +129,6 @@ exports.update = function *(next) {
         parentId = parentId._id
     }
     let resExist = yield SubjectItemTypeModel.find({"subjectName":subjectName});
-   console.log("resExist", resExist)
     if(resExist.length !== 0) {
         this.body = {
             code: 302,
