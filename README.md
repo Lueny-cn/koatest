@@ -602,16 +602,20 @@
 ### 添加题目 localhost:3000/createSubject
 
 ### 修改二级目录 (post) localhost:3000/subjectItemType/update
+```js
 data = {
   _id : 二级目录的id, (localhost:3000/subjectItemType/list 获取二级目录列表里面的_id)
-  subjectName: 试题名
-  parentType: 一级目录名
+  parentId: 一级目录id
+  subjectName: 要修改的二级目录名
+
 }
+```
 
 
 
 ### 修改试题名 (post) localhost:3000/subjectTitle/update
 
+```js
 data = {
   preTitleid：被修改的试题Id，
   subjectItem: 试题二级目录名[String],
@@ -619,6 +623,8 @@ data = {
   subjectTime: 试题时间[String],
   examTime: 考试时间[String]
 }
+```
+
 
 
 

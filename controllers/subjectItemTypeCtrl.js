@@ -117,16 +117,22 @@ exports.update = function *(next) {
     helper.auth(this);
 
     let body = this.request.body,
-        _id = body._id,
-        subjectName = body.subjectName,
-        parentType = body.parentType;
+       {
+        _id ,
+        subjectName,
+        parentId,
+        parentType
+       } = body;
+    if(!parentId) {
+        parentId = yield SubjectTypeModel.findIdBySubjectType(parentType);
+        parentId = parentId._id
+    }
 
-    let parentId = yield SubjectTypeModel.findIdBySubjectType(parentType);
-    if(parentId && parentId._id) {
+    if(parentId) {
         let item = {
             subjectName,
             parentType,
-            parentId: parentId._id
+            parentId: parentId
         };
         let result = yield SubjectItemTypeModel.update(_id, item);
 
