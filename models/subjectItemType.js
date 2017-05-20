@@ -61,8 +61,8 @@ SubjectItemType.statics.findByTypeName = function (subjectName) {
 SubjectItemType.statics.updateById = function (id, item) {
     return this.update({"_id": id}, {
         "subjectName": item.subjectName,
-        "parentType":  item.parentType,
-        "parentId":  item.parentId
+        // "parentType":  item.parentType,
+        // "parentId":  item.parentId
     }).exec();
 };
 

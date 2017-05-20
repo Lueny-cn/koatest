@@ -132,8 +132,10 @@ exports.update = function *(next) {
         let item = {
             subjectName,
             parentType,
-            parentId: parentId
+            parentId
         };
+
+        console.log(item)
         let result = yield SubjectItemTypeModel.update(_id, item);
 
         if(result.nModified  && result.nModified === 1) {
