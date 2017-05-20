@@ -73,19 +73,19 @@ SubjectTitle.statics.findByTitle  = function (title) {
 
 //这里用的是findOne，只查询一条数据
 SubjectTitle.statics.findById = function (id) {
-    return this.findOne({"_id": id}, {"title": 1})
+    return this.findOne({"_id": id})
         .exec();
 };
 
 //试题时间
 SubjectTitle.statics.findByTime = function (subjectTime) {
-    return this.find({"subjectTime": subjectTime}, {"title": 1})
+    return this.find({"subjectTime": subjectTime})
         .exec();
 };
 
 //试题类 (二级目录)
 SubjectTitle.statics.findByItemId = function (subjectItemId) {
-    return this.find({"subjectItemId": subjectItemId}, {"title": 1})
+    return this.find({"subjectItemId": subjectItemId})
         .exec();
 };
 
