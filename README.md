@@ -682,13 +682,15 @@ data = {
 (前端配合andtd Form表单的上传图片组件使用)
 
 
-  ## 获取 banner 链接 & 位置 (get) localhost:3000/banner/list/:url (url不填默认获取全部 banner)
+  ## 获取 banner 链接 & 位置 (get) localhost:3000/banner/list/:url (获取全部 banner url 填 all)
 
   ## 添加 banner （post) localhost:3000/banner/addBanner
   {
     url: String
     position: Number
   }
+
+ejs： localhost:3000/banner/bannerAdd
 
   ## 修改 banner （post) localhost:3000/banner/updateBanner
 
@@ -697,8 +699,10 @@ data = {
     newUrl: String
     position: Number
   }
+ejs： localhost:3000/banner/bannerUpdate
 
   ## 删除 banner （post） localhost:3000/banner/delteBanner
   {
     id: String
   }
+ejs： localhost:3000/banner/bannerDel
