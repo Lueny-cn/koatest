@@ -690,7 +690,7 @@ data = {
     position: Number
   }
 
-  ## 添加 banner （post) localhost:3000/bannerCtrl/updateBanner
+  ## 修改 banner （post) localhost:3000/bannerCtrl/updateBanner
 
   {
     preId: String
