@@ -685,24 +685,31 @@ data = {
   ## 获取 banner 链接 & 位置 (get) localhost:3000/banner/list/:url (获取全部 banner url 填 all)
 
   ## 添加 banner （post) localhost:3000/banner/addBanner
+ ```js
   {
     url: String
     position: Number
   }
+```
 
 ejs： localhost:3000/banner/bannerAdd
 
   ## 修改 banner （post) localhost:3000/banner/updateBanner
-
+```js
   {
     preId: String
     newUrl: String
     position: Number
   }
+```
+
 ejs： localhost:3000/banner/bannerUpdate
 
   ## 删除 banner （post） localhost:3000/banner/delteBanner
+  ```js
   {
     id: String
   }
+  ```
+
 ejs： localhost:3000/banner/bannerDel
