@@ -7,6 +7,7 @@ const subjectItemTypeController = require('../controllers/subjectItemTypeCtrl');
 const subjectTitleController = require('../controllers/subjectTitleCtrl');
 const examCtrl = require("../controllers/examCtrl");
 const uploadCtrl = require("../controllers/upload")
+const bannerCtrl = require("../controllers/bannerCtrl")
 
 module.exports = function (app) {
   // app.use(route.get(''), )
@@ -136,4 +137,7 @@ module.exports = function (app) {
   app.use(route.get( '/subjectTitle/listWeigh/:limit', subjectTitleController.listWeight )); 
   app.use(route.post( '/subjectTitle/updateExamTime', subjectTitleController.updateExamTime )); 
   app.use(route.post( '/subjectTitle/upload/:titleId', uploadCtrl.upload ));
+  app.use(route.get( '/bannerCtrl/list/:url', bannerCtrl.list ));
+  app.use(route.post( '/bannerCtrl/addBanner', bannerCtrl.insert ));
+  app.use(route.post( '/bannerCtrl/updateBanner', bannerCtrl.update ));
 }

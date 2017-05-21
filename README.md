@@ -680,3 +680,23 @@ data = {
 
 ## 上传图片 (post) localhost:3000/subjectTitle/upload/:titleId
 (前端配合andtd Form表单的上传图片组件使用)
+
+  app.use(route.get( '/bannerCtrl/list/:url', bannerCtrl.list ));
+  app.use(route.post( '/bannerCtrl/addBanner', bannerCtrl.insert ));
+  app.use(route.post( '/bannerCtrl/updateBanner', bannerCtrl.update ));
+
+  ## 获取 banner 链接 & 位置 (get) localhost:3000/bannerCtrl/list/:url (url不填默认获取全部 banner)
+
+  ## 添加 banner （post) localhost:3000/bannerCtrl/addBanner
+  {
+    url: String
+    position: Number
+  }
+
+  ## 添加 banner （post) localhost:3000/bannerCtrl/updateBanner
+
+  {
+    preId: String
+    newUrl: String
+    position: Number
+  }

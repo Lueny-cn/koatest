@@ -329,6 +329,8 @@ exports.listWeight= function *(limit) {
     if( typeof(limit) !== "number") {
         limit = 50;
     }
+
+    
     this.body = yield SubjectTitleModel.find().sort({"weight": -1}).limit(limit);
 }
 
