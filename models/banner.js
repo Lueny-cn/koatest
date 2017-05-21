@@ -15,7 +15,7 @@ const Banner = new Schema({
             unique: true
         }
     }, 
-    "postiton": {
+    "position": {
         type: Number,
         index: true,
         default: 0
@@ -55,7 +55,7 @@ Banner.statics.findByUrl  = function (url) {
 
 Banner.statics.updateByUrl  = function (data) {
     return this.update({"url": data.url},{
-        "postiton": data.postiton
+        "position": data.position
     }).exec();
 };
 

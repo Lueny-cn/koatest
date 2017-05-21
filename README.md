@@ -682,18 +682,23 @@ data = {
 (前端配合andtd Form表单的上传图片组件使用)
 
 
-  ## 获取 banner 链接 & 位置 (get) localhost:3000/bannerCtrl/list/:url (url不填默认获取全部 banner)
+  ## 获取 banner 链接 & 位置 (get) localhost:3000/banner/list/:url (url不填默认获取全部 banner)
 
-  ## 添加 banner （post) localhost:3000/bannerCtrl/addBanner
+  ## 添加 banner （post) localhost:3000/banner/addBanner
   {
     url: String
     position: Number
   }
 
-  ## 修改 banner （post) localhost:3000/bannerCtrl/updateBanner
+  ## 修改 banner （post) localhost:3000/banner/updateBanner
 
   {
     preId: String
     newUrl: String
     position: Number
+  }
+
+  ## 删除 banner （post） localhost:3000/banner/delteBanner
+  {
+    id: String
   }

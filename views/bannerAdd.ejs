@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+      <form action="/banner/addBanner" method="post">
+        <div class="field required">
+          <label>url</label>
+          <input placeholder="url" type="text" name="url">
+        </div>
+        <div class="field required">
+          <label>position</label>
+          <input placeholder="position 数字" type="text" name="position">
+        </div>
+        <input type="submit" class="ui button fluid" value="添加">
+      </form>
+  </body>
+  <script type="text/javascript">
+
+
+  </script>
+</html>

@@ -1,17 +1,19 @@
 const BannerModel = require('../models/banner');
+const helper = require("../helper/helper");
 
 //列出所有用户数据，支持分页
 exports.list = function * (url) {
     // let page = this.query.page || 1; let limit = 10; let skip = (page-1)*limit;
     // this.body = yield UserModel.find().skip(skip).limit(limit);
-    if (!!url) {
-        let result = yield BannerModel.find({"url": url});
+    if (url == "all") {
+        let result = yield BannerModel.find();
         this.body = {
             code: 200,
             data: result
         }
+      
     } else {
-        let result = yield BannerModel.find();
+        let result = yield BannerModel.find({"url": url});
         this.body = {
             code: 200,
             data: result
@@ -51,7 +53,7 @@ exports.insert = function * () {
 
     if (body && body.position) {
         let data = {
-            "position": body.position,
+            "position": parseInt(body.position),
             "url": body.url
         };
 
@@ -78,7 +80,7 @@ exports.update = function * () {
     if (body && body.preId && body.preId.match(/^[0-9a-fA-F]{24}$/)) {
         let data = {
             url: body.url,
-            position: body.position,
+            position: parseInt(body.position),
             preId: body.preId
 
         };
@@ -109,3 +111,29 @@ exports.update = function * () {
     }
 
 };
+
+exports.delete = function *() {
+    let id = this.request.body.id;
+    if(id.match(/^[0-9a-fA-F]{24}$/)) {
+        let result = yield BannerModel.remove({"_id": id});
+
+        if(result.ok === 1 && result.n !== 0) {
+            this.body = {
+                code: 200,
+                msg: "数据删除成功"
+            }
+        } else {
+            this.body = {
+                code: 304,
+                msg: "数据已经删除了"
+            }
+        }
+         
+    } else {
+        this.body = {
+            code: 400,
+            msg: "输入的数据有误"
+        }
+    }
+   
+}

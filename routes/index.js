@@ -103,6 +103,22 @@ module.exports = function (app) {
     })
   }));
 
+  app.use(route.get('/bannerAdd', function() {
+    return this.render('bannerAdd', {
+      title: 'banner 添加'
+    })
+  }));
+  app.use(route.get('/bannerUpdate', function() {
+    return this.render('bannerUpdate', {
+      title: 'banner 修改'
+    })
+  }));
+  app.use(route.get('/bannerDel', function() {
+    return this.render('bannerDel', {
+      title: 'banner 删除'
+    })
+  }));
+
   app.use(route.post( '/user/signup', userController.signup ));
   app.use(route.post( '/user/signin', userController.signin ));
   app.use(route.get( '/user/logout', userController.logout ));
@@ -137,7 +153,8 @@ module.exports = function (app) {
   app.use(route.get( '/subjectTitle/listWeigh/:limit', subjectTitleController.listWeight )); 
   app.use(route.post( '/subjectTitle/updateExamTime', subjectTitleController.updateExamTime )); 
   app.use(route.post( '/subjectTitle/upload/:titleId', uploadCtrl.upload ));
-  app.use(route.get( '/bannerCtrl/list/:url', bannerCtrl.list ));
-  app.use(route.post( '/bannerCtrl/addBanner', bannerCtrl.insert ));
-  app.use(route.post( '/bannerCtrl/updateBanner', bannerCtrl.update ));
+  app.use(route.get( '/banner/list/:url', bannerCtrl.list ));
+  app.use(route.post( '/banner/addBanner', bannerCtrl.insert ));
+  app.use(route.post( '/banner/updateBanner', bannerCtrl.update ));
+  app.use(route.post( '/banner/deleteBanner', bannerCtrl.delete ));
 }

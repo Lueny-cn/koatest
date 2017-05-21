@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+      <form action="/banner/updateBanner" method="post">
+        
+        <div class="field required">
+          <label>preId</label>
+          <input placeholder="preId" type="text" name="preId">
+        </div>
+        <div class="field required">
+          <label>url</label>
+          <input placeholder="url" type="text" name="url">
+        </div>
+        <div class="field required">
+          <label>position</label>
+          <input placeholder="position 数字" type="test" name="position">
+        </div>
+        <input type="submit" class="ui button fluid" value="修改">
+      </form>
+  </body>
+  <script type="text/javascript">
+
+
+  </script>
+</html>
