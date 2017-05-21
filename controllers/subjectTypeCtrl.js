@@ -28,7 +28,18 @@ exports.insert = function *(){
     helper.auth(this);
 
     let body = this.request.body;
+    
+    let resExist = yield SubjectTypeModel.find({"title": body.typename});
+       
+    if(resExist.length !== 0) {
+        this.body = {
+            code: 302,
+            msg: "改一级目录已经存在"
 
+        }
+        return ;
+    }
+    
     if(body && body.typename) {
         let data = {
             "typename": body.typename

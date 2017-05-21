@@ -33,6 +33,16 @@ exports.insert = function *(){
             }
             return ;
         }
+        let resExit = yield SubjectModel.find({"question": subject.question});
+        if(resExit.length !==0) {
+           if( resExit[0].titleId == subject.titleId) {
+               this.body = {
+                   code: 304,
+                   msg: "题目已经存在当前试题中"
+               }
+               return ;
+           }
+        }
 
         subject.choice instanceof Array ?
             subject.choice.forEach( (item, index) => {

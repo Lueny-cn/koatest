@@ -10,9 +10,7 @@ const Schema = mongoose.Schema;
 const Subject = new Schema({
     "question": {
         type: String,
-        index: {
-            unique: true
-        }
+        index: true
     },
     "title": {
         type: String,

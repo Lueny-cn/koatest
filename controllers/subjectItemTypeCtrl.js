@@ -82,11 +82,12 @@ exports.insert = function *(next) {
 
     if(parentId && parentId._id && subjectName && parentType) {
 
-        let subjectExit = yield SubjectItemTypeModel.findByTypeName(subjectName);
-        if(subjectExit) {
+        let resExist = yield SubjectItemTypeModel.find({"subjectName":subjectName});
+        if(resExist.length !== 0) {
             this.body = {
-                code: 400,
-                msg: "已存在该课程"
+                code: 302,
+                msg: "该二级目录已经存在"
+
             }
             return ;
         }

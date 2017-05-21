@@ -23,7 +23,16 @@ exports.insert = function *(){
 
 
     if(body) {
+       let resExist = yield SubjectTitleModel.find({"title": body.title});
+       
+       if(resExist.length !== 0) {
+            this.body = {
+                code: 302,
+                msg: "试题名已经存在"
 
+            }
+            return ;
+        }
        let subjectItem = yield SubjectItemModel.findByTypeName(body.subjectItem);
        if(subjectItem) {
            data.title = body.title;
