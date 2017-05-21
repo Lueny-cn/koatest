@@ -659,24 +659,30 @@ data = {
 
 ### 推荐 试题接口: (post) http://localhost:3000/subjectTitle/updateWeight 
 参数: 
-data = {
+```js
+{
   titleId: 试题名id
 }
+```
 
 ### 获取按权值排序的试题列表 (get) http://localhost:3000/subjectTitle/listWeigh/:limit  
 (注: limit 是 Number 类型)
 
 ### 修改密码  (post) localhost:3000/user/updatePassword  
+```js
 {
   pre_password: "xxx1"
   new_password: "xxx2"
 }
+```
 
 ### 修改试题考试时间 (post) localhost:3000/subjectTitle/updateExamTime
+```js
 {
   titleId,
   examTime
 }
+```
 
 ## 上传图片 (post) localhost:3000/subjectTitle/upload/:titleId
 (前端配合andtd Form表单的上传图片组件使用)
