@@ -698,7 +698,7 @@ data = {
   }
 ```
 
-ejs： localhost:3000/banner/bannerAdd
+ejs： localhost:3000/bannerAdd
 
   ## 修改 banner （post) localhost:3000/banner/updateBanner
 ```js
@@ -709,13 +709,13 @@ ejs： localhost:3000/banner/bannerAdd
   }
 ```
 
-ejs： localhost:3000/banner/bannerUpdate
+ejs： localhost:3000/bannerUpdate
 
-  ## 删除 banner （post） localhost:3000/banner/delteBanner
+  ## 删除 banner （post） localhost:3000/banner/deleteBanner
   ```js
   {
     id: String
   }
   ```
 
-ejs： localhost:3000/banner/bannerDel
+ejs： localhost:3000/bannerDel
