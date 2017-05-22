@@ -53,7 +53,7 @@ exports.insert = function * () {
 
     if (body && body.position) {
         let data = {
-            "position": parseInt(body.position),
+            "position": parseInt((body.position) || "0"),
             "url": body.url
         };
 
@@ -78,9 +78,19 @@ exports.update = function * () {
     let body = this.request.body;
 
     if (body && body.preId && body.preId.match(/^[0-9a-fA-F]{24}$/)) {
+        let resExist = yield BannerModel.find({"_id": body.preId});
+        let prePosition = resExist[0].position;
+
+        if(!prePosition) {
+            this.body = {
+                code: 400,
+                msg: "数据不存在"
+            }
+            return ;
+        }
         let data = {
             url: body.url,
-            position: parseInt(body.position),
+            position: parseInt((body.position) || prePosition),
             preId: body.preId
 
         };
